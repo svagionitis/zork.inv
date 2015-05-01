@@ -61,5 +61,29 @@ struct {
 #define RNWALL (32)
 #define REND   (16)
 
+// Exits
+#define EXITS_MAX 900
+struct {
+    integer xlnt, //Array counter for exits
+            travel[EXITS_MAX];
+} exits;
+
+#define exits_rooms exits
+
+// Objects
+#define OBJCTS_MAX 220
+struct {
+    integer olnt, // Array counter for objects
+            odesc1[OBJCTS_MAX], odesc2[OBJCTS_MAX],
+            odesco[OBJCTS_MAX], oactio[OBJCTS_MAX],
+            oflag1[OBJCTS_MAX], oflag2[OBJCTS_MAX],
+            ofval[OBJCTS_MAX], otval[OBJCTS_MAX],
+            osize[OBJCTS_MAX], ocapac[OBJCTS_MAX],
+            oroom[OBJCTS_MAX], oadv[OBJCTS_MAX],
+            ocan[OBJCTS_MAX], oread[OBJCTS_MAX];
+} objcts;
+
+#define objcts_o objcts
+#define eqo ((integer *)&objcts_o + 1)
 
 #endif /* READ_DB_H */

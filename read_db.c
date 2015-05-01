@@ -10,9 +10,9 @@
 #if 0
 // dinit.c:38
 /* Read a single two byte integer from the index file */
-#define rdint(indxfile) \
-    (ch = getc(indxfile), \
-     ((ch > 127) ? (ch - 256) : (ch)) * 256 + getc(indxfile))
+#define rdint(f) \
+    (ch = getc(f), \
+     ((ch > 127) ? (ch - 256) : (ch)) * 256 + getc(f))
 #endif
 
 inline integer rdint(FILE *f)
@@ -30,15 +30,15 @@ inline integer rdint(FILE *f)
 #if 0
 // dinit.c:44
 /* Read a number of two byte integers from the index file */
-static void rdints(c, pi, indxfile)
+static void rdints(c, pi, f)
 integer c;
 integer *pi;
-FILE *indxfile;
+FILE *f;
 {
     integer ch;	/* Local variable for rdint */
 
     while (c-- != 0)
-	*pi++ = rdint(indxfile);
+	*pi++ = rdint(f);
 }
 #endif
 
@@ -54,10 +54,10 @@ void rdints(integer c, integer *pi, FILE *f)
 /* Read a partial array of integers.  These are stored as index,value
  * pairs.
  */
-static void rdpartialints(c, pi, indxfile)
+static void rdpartialints(c, pi, f)
 integer c;
 integer *pi;
-FILE *indxfile;
+FILE *f;
 {
     integer ch;	/* Local variable for rdint */
 
@@ -65,17 +65,17 @@ FILE *indxfile;
 	int i;
 
 	if (c < 255) {
-	    i = getc(indxfile);
+	    i = getc(f);
 	    if (i == 255)
 		return;
 	}
 	else {
-	    i = rdint(indxfile);
+	    i = rdint(f);
 	    if (i == -1)
 		return;
 	}
 
-	pi[i] = rdint(indxfile);
+	pi[i] = rdint(f);
     }
 }
 #endif
@@ -106,13 +106,13 @@ void rdpartialints(integer c, integer *pi, FILE *f)
 #if 0
 // dinit.c:86
 /* Read a number of one byte flags from the index file */
-static void rdflags(c, pf, indxfile)
+static void rdflags(c, pf, f)
 integer c;
 logical *pf;
-FILE *indxfile;
+FILE *f;
 {
     while (c-- != 0)
-	*pf++ = getc(indxfile);
+	*pf++ = getc(f);
 }
 #endif
 
@@ -181,6 +181,14 @@ int main(int argc, char *argv[])
     // Init rooms
     memset(&rooms_place, 0, sizeof(rooms));
 
+    // Init exits
+    memset(&exits_rooms, 0, sizeof(exits));
+    exits_rooms.xlnt = 1;
+
+    //Init objects
+    memset(&objcts_o, 0, sizeof(objcts));
+
+
     // Check version
     integer maj = rdint(f);
     fprintf(stdout, "Pos: %d Data read %d - %c\n", ftell(f), maj, RETURN_PRINTABLE(maj));
@@ -220,6 +228,47 @@ int main(int argc, char *argv[])
     rdpartialints(rooms_place.rlnt, &rooms_place.rval[0], f);
     fprintf(stdout, "Pos: %d\n", ftell(f));
     rdints(rooms_place.rlnt, &rooms_place.rflag[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+
+
+    // Populate exits for rooms
+    exits_rooms.xlnt = rdint(f);
+    fprintf(stdout, "Pos: %d Data read %d - %c\n", ftell(f), exits_rooms.xlnt, RETURN_PRINTABLE(exits_rooms.xlnt));
+    rdints(exits_rooms.xlnt, &exits_rooms.travel[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+
+
+    // Populate objects
+    objcts_o.olnt = rdint(f);
+    fprintf(stdout, "Pos: %d Data read %d - %c\n", ftell(f), objcts_o.olnt, RETURN_PRINTABLE(objcts_o.olnt));
+
+    rdints(objcts_o.olnt, &objcts_o.odesc1[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(objcts_o.olnt, &objcts_o.odesc2[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.odesco[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.oactio[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(objcts_o.olnt, &objcts_o.oflag1[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.oflag2[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.ofval[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.otval[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(objcts_o.olnt, &objcts_o.osize[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.ocapac[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(objcts_o.olnt, &objcts_o.oroom[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.oadv[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.ocan[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdpartialints(objcts_o.olnt, &objcts_o.oread[0], f);
     fprintf(stdout, "Pos: %d\n", ftell(f));
 
 #endif
