@@ -1,0 +1,2 @@
+# zork.inv
+Zork investigation
