@@ -10,9 +10,8 @@
 #include "funcs.h"
 #include "vars.h"
 
-int main(argc, argv)       /* void changed to int, Volker Blasius, 11jul93 */
-int argc;
-char **argv;
+/* void changed to int, Volker Blasius, 11jul93 */
+int main(int argc, char *argv[])
 {
 /* 1) INITIALIZE DATA STRUCTURES */
 /* 2) PLAY GAME */
