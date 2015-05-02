@@ -48,7 +48,7 @@ static void rdints(integer c, integer *pi, FILE *indxfile)
     integer ch;	/* Local variable for rdint */
 
     while (c-- != 0)
-	*pi++ = rdint(indxfile);
+        *pi++ = rdint(indxfile);
 }
 
 /* Read a partial array of integers.  These are stored as index,value
@@ -60,20 +60,20 @@ static void rdpartialints(integer c, integer *pi, FILE *indxfile)
     integer ch;	/* Local variable for rdint */
 
     while (1) {
-	int i;
+        int i;
 
-	if (c < 255) {
-	    i = getc(indxfile);
-	    if (i == 255)
-		return;
-	}
-	else {
-	    i = rdint(indxfile);
-	    if (i == -1)
-		return;
-	}
+        if (c < 255) {
+            i = getc(indxfile);
+            if (i == 255)
+                return;
+        }
+        else {
+            i = rdint(indxfile);
+            if (i == -1)
+                return;
+        }
 
-	pi[i] = rdint(indxfile);
+        pi[i] = rdint(indxfile);
     }
 }
 
@@ -82,7 +82,7 @@ static void rdpartialints(integer c, integer *pi, FILE *indxfile)
 static void rdflags(integer c, logical *pf, FILE *indxfile)
 {
     while (c-- != 0)
-	*pf++ = getc(indxfile);
+        *pf++ = getc(indxfile);
 }
 
 logical init_()
@@ -188,16 +188,16 @@ logical init_()
     i__1 = cmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR CLOCK EVENTS */
-	cevent_1.cflag[i - 1] = FALSE_;
-	cevent_1.ctick[i - 1] = 0;
-	cevent_1.cactio[i - 1] = 0;
+        cevent_1.cflag[i - 1] = FALSE_;
+        cevent_1.ctick[i - 1] = 0;
+        cevent_1.cactio[i - 1] = 0;
 /* L5: */
     }
 
     i__1 = fmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR FLAGS. */
-	flags[i - 1] = FALSE_;
+        flags[i - 1] = FALSE_;
 /* L10: */
     }
     findex_1.buoyf = TRUE_;
@@ -210,7 +210,7 @@ logical init_()
     i__1 = smax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR SWITCHES. */
-	switch_[i - 1] = 0;
+        switch_[i - 1] = 0;
 /* L12: */
     }
     findex_1.ormtch = 4;
@@ -224,78 +224,78 @@ logical init_()
     i__1 = r2max;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR ROOM 2 ARRAY. */
-	oroom2_1.rroom2[i - 1] = 0;
-	oroom2_1.oroom2[i - 1] = 0;
+        oroom2_1.rroom2[i - 1] = 0;
+        oroom2_1.oroom2[i - 1] = 0;
 /* L15: */
     }
 
     i__1 = xmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR TRAVEL ARRAY. */
-	exits_1.travel[i - 1] = 0;
+        exits_1.travel[i - 1] = 0;
 /* L20: */
     }
 
     i__1 = vmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR VILLAINS ARRAYS. */
-	vill_1.vopps[i - 1] = 0;
-	vill_1.vprob[i - 1] = 0;
-	vill_1.villns[i - 1] = 0;
-	vill_1.vbest[i - 1] = 0;
-	vill_1.vmelee[i - 1] = 0;
+        vill_1.vopps[i - 1] = 0;
+        vill_1.vprob[i - 1] = 0;
+        vill_1.villns[i - 1] = 0;
+        vill_1.vbest[i - 1] = 0;
+        vill_1.vmelee[i - 1] = 0;
 /* L30: */
     }
 
     i__1 = omax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR OBJECT ARRAYS. */
-	objcts_1.odesc1[i - 1] = 0;
-	objcts_1.odesc2[i - 1] = 0;
-	objcts_1.odesco[i - 1] = 0;
-	objcts_1.oread[i - 1] = 0;
-	objcts_1.oactio[i - 1] = 0;
-	objcts_1.oflag1[i - 1] = 0;
-	objcts_1.oflag2[i - 1] = 0;
-	objcts_1.ofval[i - 1] = 0;
-	objcts_1.otval[i - 1] = 0;
-	objcts_1.osize[i - 1] = 0;
-	objcts_1.ocapac[i - 1] = 0;
-	objcts_1.ocan[i - 1] = 0;
-	objcts_1.oadv[i - 1] = 0;
-	objcts_1.oroom[i - 1] = 0;
+        objcts_1.odesc1[i - 1] = 0;
+        objcts_1.odesc2[i - 1] = 0;
+        objcts_1.odesco[i - 1] = 0;
+        objcts_1.oread[i - 1] = 0;
+        objcts_1.oactio[i - 1] = 0;
+        objcts_1.oflag1[i - 1] = 0;
+        objcts_1.oflag2[i - 1] = 0;
+        objcts_1.ofval[i - 1] = 0;
+        objcts_1.otval[i - 1] = 0;
+        objcts_1.osize[i - 1] = 0;
+        objcts_1.ocapac[i - 1] = 0;
+        objcts_1.ocan[i - 1] = 0;
+        objcts_1.oadv[i - 1] = 0;
+        objcts_1.oroom[i - 1] = 0;
 /* L40: */
     }
 
     i__1 = rmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR ROOM ARRAYS. */
-	rooms_1.rdesc1[i - 1] = 0;
-	rooms_1.rdesc2[i - 1] = 0;
-	rooms_1.ractio[i - 1] = 0;
-	rooms_1.rflag[i - 1] = 0;
-	rooms_1.rval[i - 1] = 0;
-	rooms_1.rexit[i - 1] = 0;
+        rooms_1.rdesc1[i - 1] = 0;
+        rooms_1.rdesc2[i - 1] = 0;
+        rooms_1.ractio[i - 1] = 0;
+        rooms_1.rflag[i - 1] = 0;
+        rooms_1.rval[i - 1] = 0;
+        rooms_1.rexit[i - 1] = 0;
 /* L50: */
     }
 
     i__1 = mmax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR MESSAGE DIRECTORY. */
-	rmsg_1.rtext[i - 1] = 0;
+        rmsg_1.rtext[i - 1] = 0;
 /* L60: */
     }
 
     i__1 = amax;
     for (i = 1; i <= i__1; ++i) {
 /* 						!CLEAR ADVENTURER'S ARRAYS. */
-	advs_1.aroom[i - 1] = 0;
-	advs_1.ascore[i - 1] = 0;
-	advs_1.avehic[i - 1] = 0;
-	advs_1.aobj[i - 1] = 0;
-	advs_1.aactio[i - 1] = 0;
-	advs_1.astren[i - 1] = 0;
-	advs_1.aflag[i - 1] = 0;
+        advs_1.aroom[i - 1] = 0;
+        advs_1.ascore[i - 1] = 0;
+        advs_1.avehic[i - 1] = 0;
+        advs_1.aobj[i - 1] = 0;
+        advs_1.aactio[i - 1] = 0;
+        advs_1.astren[i - 1] = 0;
+        advs_1.aflag[i - 1] = 0;
 /* L70: */
     }
 
@@ -309,7 +309,7 @@ logical init_()
 /* this way, the wizard doesn't have to recompile to use gdt */
 
     if (wizard())
-	debug_1.gdtflg = 1;
+        debug_1.gdtflg = 1;
 
 #endif /* ALLOW_GDT */
 
@@ -323,10 +323,10 @@ logical init_()
 
 #ifdef __AMOS__
     if ((dbfile = fdopen(ropen(LOCALTEXTFILE, 0), BINREAD)) == NULL &&
-	(dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL) {
+        (dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL) {
 #else
     if ((dbfile = fopen(LOCALTEXTFILE, BINREAD)) == NULL &&
-	(dbfile = fopen(TEXTFILE, BINREAD)) == NULL) {
+        (dbfile = fopen(TEXTFILE, BINREAD)) == NULL) {
 #endif
         more_output(NULL);
         printf("I can't open %s.\n", TEXTFILE);
