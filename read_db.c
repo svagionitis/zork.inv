@@ -188,6 +188,12 @@ int main(int argc, char *argv[])
     //Init objects
     memset(&objcts_o, 0, sizeof(objcts));
 
+    // Init oroom2
+    memset(&oroom2_o, 0, sizeof(oroom2));
+
+    // Init cevent
+    memset(&cevent_c, 0, sizeof(cevent));
+
 
     // Check version
     integer maj = rdint(f);
@@ -269,6 +275,28 @@ int main(int argc, char *argv[])
     rdpartialints(objcts_o.olnt, &objcts_o.ocan[0], f);
     fprintf(stdout, "Pos: %d\n", ftell(f));
     rdpartialints(objcts_o.olnt, &objcts_o.oread[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+
+
+    // Populate oroom2
+    oroom2_o.r2lnt = rdint(f);
+    fprintf(stdout, "Pos: %d Data read %d - %c\n", ftell(f), oroom2_o.r2lnt, RETURN_PRINTABLE(oroom2_o.r2lnt));
+
+    rdints(oroom2_o.r2lnt, &oroom2_o.oroom2[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(oroom2_o.r2lnt, &oroom2_o.rroom2[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+
+
+    // Populate cevent
+    cevent_c.clnt = rdint(f);
+    fprintf(stdout, "Pos: %d Data read %d - %c\n", ftell(f), cevent_c.clnt, RETURN_PRINTABLE(cevent_c.clnt));
+
+    rdints(cevent_c.clnt, &cevent_c.ctick[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdints(cevent_c.clnt, &cevent_c.cactio[0], f);
+    fprintf(stdout, "Pos: %d\n", ftell(f));
+    rdflags(cevent_c.clnt, &cevent_c.cflag[0], f);
     fprintf(stdout, "Pos: %d\n", ftell(f));
 
 #endif
