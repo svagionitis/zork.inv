@@ -3,6 +3,10 @@
 #ifndef FUNCS_H
 #define FUNCS_H
 
+// Introduce int{32,8}_t integer types
+// More info @ http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html
+#include <stdint.h>
+
 /* If __STDC__ is not defined, don't use function prototypes, void, or
  * const.
  */
@@ -34,8 +38,10 @@
 #endif /* ! __STDC__ */
 #endif /* ! unix */
 
-typedef int integer;
-typedef int logical;
+// Use 32 bit for integer
+// and 8 bit for logical
+typedef int32_t integer;
+typedef int8_t logical;
 
 #define TRUE_ (1)
 #define FALSE_ (0)
