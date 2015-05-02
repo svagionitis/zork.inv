@@ -43,10 +43,7 @@ FILE *dbfile;
 
 /* Read a number of two byte integers from the index file */
 
-static void rdints(c, pi, indxfile)
-integer c;
-integer *pi;
-FILE *indxfile;
+static void rdints(integer c, integer *pi, FILE *indxfile)
 {
     integer ch;	/* Local variable for rdint */
 
@@ -58,10 +55,7 @@ FILE *indxfile;
  * pairs.
  */
 
-static void rdpartialints(c, pi, indxfile)
-integer c;
-integer *pi;
-FILE *indxfile;
+static void rdpartialints(integer c, integer *pi, FILE *indxfile)
 {
     integer ch;	/* Local variable for rdint */
 
@@ -85,10 +79,7 @@ FILE *indxfile;
 
 /* Read a number of one byte flags from the index file */
 
-static void rdflags(c, pf, indxfile)
-integer c;
-logical *pf;
-FILE *indxfile;
+static void rdflags(integer c, integer *pf, FILE *indxfile)
 {
     while (c-- != 0)
 	*pf++ = getc(indxfile);
