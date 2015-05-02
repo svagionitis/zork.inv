@@ -51,70 +51,26 @@ CFLAGS = -O
 ##################################################################
 
 # Source files
-CSRC =	actors.c ballop.c clockr.c demons.c dgame.c dinit.c dmain.c\
-	dso1.c dso2.c dso3.c dso4.c dso5.c dso6.c dso7.c dsub.c dverb1.c\
-	dverb2.c gdt.c lightp.c local.c nobjs.c np.c np1.c np2.c np3.c\
-	nrooms.c objcts.c rooms.c sobjs.c supp.c sverbs.c verbs.c villns.c
+CSRC =	$(shell echo *.c)
 
 # Object files
-OBJS =	actors.o ballop.o clockr.o demons.o dgame.o dinit.o dmain.o\
-	dso1.o dso2.o dso3.o dso4.o dso5.o dso6.o dso7.o dsub.o dverb1.o\
-	dverb2.o gdt.o lightp.o local.o nobjs.o np.o np1.o np2.o np3.o\
-	nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
+OBJS =	$(CSRC:.c=.o)
 
-dungeon: $(OBJS) dtextc.dat
-	$(CC) $(CFLAGS) -o dungeon $(OBJS) $(LIBS)
+MAIN =	dungeon
 
-install: dungeon dtextc.dat
-	cp dungeon $(BINDIR)
+$(MAIN): $(OBJS) dtextc.dat
+	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) $(LIBS)
+
+install: $(MAIN) dtextc.dat
+	cp $(MAIN) $(BINDIR)
 	cp dtextc.dat $(LIBDIR)
 
 clean:
-	rm -f $(OBJS) dungeon dtextc.dat core dsave.dat *~
+	rm -f $(OBJS) $(MAIN) dtextc.dat core dsave.dat *~
 
 dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
-dinit.o: dinit.c funcs.h vars.h
-	$(CC) $(CFLAGS) $(GDTFLAG) -DTEXTFILE=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
+.c.o:
+	$(CC) $(CFLAGS) $(GDTFLAG) $(TERMFLAG) -DTEXTFILE=\"$(LIBDIR)/dtextc.dat\" -c $<  -o $@
 
-dgame.o: dgame.c funcs.h vars.h
-	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c
-
-gdt.o: gdt.c funcs.h vars.h
-	$(CC) $(CFLAGS) $(GDTFLAG) -c gdt.c
-
-local.o: local.c funcs.h vars.h
-	$(CC) $(CFLAGS) $(GDTFLAG) -c local.c
-
-supp.o: supp.c funcs.h vars.h
-	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c	
-
-actors.o: funcs.h vars.h
-ballop.o: funcs.h vars.h
-clockr.o: funcs.h vars.h
-demons.o: funcs.h vars.h
-dmain.o: funcs.h vars.h
-dso1.o: funcs.h vars.h
-dso2.o: funcs.h vars.h
-dso3.o: funcs.h vars.h
-dso4.o: funcs.h vars.h
-dso5.o: funcs.h vars.h
-dso6.o: funcs.h vars.h
-dso7.o: funcs.h vars.h
-dsub.o: funcs.h vars.h
-dverb1.o: funcs.h vars.h
-dverb2.o: funcs.h vars.h
-lightp.o: funcs.h vars.h
-nobjs.o: funcs.h vars.h
-np.o: funcs.h vars.h
-np1.o: funcs.h vars.h parse.h
-np2.o: funcs.h vars.h parse.h
-np3.o: funcs.h vars.h parse.h
-nrooms.o: funcs.h vars.h
-objcts.o: funcs.h vars.h
-rooms.o: funcs.h vars.h
-sobjs.o: funcs.h vars.h
-sverbs.o: funcs.h vars.h
-verbs.o: funcs.h vars.h
-villns.o: funcs.h vars.h
