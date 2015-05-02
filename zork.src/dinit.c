@@ -89,7 +89,8 @@ logical init_()
 {
     /* System generated locals */
     integer i__1;
-    logical ret_val;
+    logical ret_val = FALSE_;
+/* 						!ASSUME INIT FAILS. */
 
     /* Local variables */
     integer xmax, r2max, dirmax, recno;
@@ -102,29 +103,25 @@ logical init_()
 
 /* FIRST CHECK FOR PROTECTION VIOLATION */
 
-    if (protected()) {
-	goto L10000;
-    }
+    if (! protected()) {
 /* 						!PROTECTION VIOLATION? */
-    more_output("There appears before you a threatening figure clad all over");
-    more_output("in heavy black armor.  His legs seem like the massive trunk");
-    more_output("of the oak tree.  His broad shoulders and helmeted head loom");
-    more_output("high over your own puny frame, and you realize that his powerful");
-    more_output("arms could easily crush the very life from your body.  There");
-    more_output("hangs from his belt a veritable arsenal of deadly weapons:");
-    more_output("sword, mace, ball and chain, dagger, lance, and trident.");
-    more_output("He speaks with a commanding voice:");
-    more_output("");
-    more_output("                    \"You shall not pass.\"");
-    more_output("");
-    more_output("As he grabs you by the neck all grows dim about you.");
-    exit_();
+        more_output("There appears before you a threatening figure clad all over");
+        more_output("in heavy black armor.  His legs seem like the massive trunk");
+        more_output("of the oak tree.  His broad shoulders and helmeted head loom");
+        more_output("high over your own puny frame, and you realize that his powerful");
+        more_output("arms could easily crush the very life from your body.  There");
+        more_output("hangs from his belt a veritable arsenal of deadly weapons:");
+        more_output("sword, mace, ball and chain, dagger, lance, and trident.");
+        more_output("He speaks with a commanding voice:");
+        more_output("");
+        more_output("                    \"You shall not pass.\"");
+        more_output("");
+        more_output("As he grabs you by the neck all grows dim about you.");
+        exit_();
+    }
 
 /* NOW START INITIALIZATION PROPER */
 
-L10000:
-    ret_val = FALSE_;
-/* 						!ASSUME INIT FAILS. */
     mmax = 1050;
 /* 						!SET UP ARRAY LIMITS. */
     omax = 220;
@@ -311,9 +308,8 @@ L10000:
 /* allow setting gdtflg true if user id matches wizard id */
 /* this way, the wizard doesn't have to recompile to use gdt */
 
-    if (wizard()) {
+    if (wizard())
 	debug_1.gdtflg = 1;
-    }
 
 #endif /* ALLOW_GDT */
 
@@ -327,12 +323,16 @@ L10000:
 
 #ifdef __AMOS__
     if ((dbfile = fdopen(ropen(LOCALTEXTFILE, 0), BINREAD)) == NULL &&
-	(dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL)
+	(dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL) {
 #else
     if ((dbfile = fopen(LOCALTEXTFILE, BINREAD)) == NULL &&
-	(dbfile = fopen(TEXTFILE, BINREAD)) == NULL)
+	(dbfile = fopen(TEXTFILE, BINREAD)) == NULL) {
 #endif
-	goto L1950;
+        more_output(NULL);
+        printf("I can't open %s.\n", TEXTFILE);
+
+        return ret_val;
+    }
 
     indxfile = dbfile;
 
@@ -342,7 +342,25 @@ L10000:
 
 /* 						!GET VERSION. */
     if (i != vers_1.vmaj || j != vers_1.vmin) {
-	goto L1925;
+/* ERRORS-- INIT FAILS. */
+        more_output(NULL);
+        printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
+        more_output(NULL);
+        printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin,
+               vers_1.vedit);
+
+        more_output("Suddenly a sinister, wraithlike figure appears before you,");
+        more_output("seeming to float in the air.  In a low, sorrowful voice he says,");
+        more_output("\"Alas, the very nature of the world has changed, and the dungeon");
+        more_output("cannot be found.  All must now pass away.\"  Raising his oaken staff");
+        more_output("in farewell, he fades into the spreading darkness.  In his place");
+        more_output("appears a tastefully lettered sign reading:");
+        more_output("");
+        more_output("                       INITIALIZATION FAILURE");
+        more_output("");
+        more_output("The darkness becomes all encompassing, and your vision fails.");
+
+        return ret_val;
     }
 
     state_1.mxscor = rdint(indxfile);
@@ -427,30 +445,4 @@ L10000:
 
     return ret_val;
 /* INIT, PAGE 6 */
-
-/* ERRORS-- INIT FAILS. */
-
-L1925:
-    more_output(NULL);
-    printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
-    more_output(NULL);
-    printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin,
-	   vers_1.vedit);
-    goto L1975;
-L1950:
-    more_output(NULL);
-    printf("I can't open %s.\n", TEXTFILE);
-L1975:
-    more_output("Suddenly a sinister, wraithlike figure appears before you,");
-    more_output("seeming to float in the air.  In a low, sorrowful voice he says,");
-    more_output("\"Alas, the very nature of the world has changed, and the dungeon");
-    more_output("cannot be found.  All must now pass away.\"  Raising his oaken staff");
-    more_output("in farewell, he fades into the spreading darkness.  In his place");
-    more_output("appears a tastefully lettered sign reading:");
-    more_output("");
-    more_output("                       INITIALIZATION FAILURE");
-    more_output("");
-    more_output("The darkness becomes all encompassing, and your vision fails.");
-    return ret_val;
-
 } /* init_ */
