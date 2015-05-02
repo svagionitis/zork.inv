@@ -38,28 +38,24 @@ void exit_()
 
 /* Get time in hours, minutes and seconds */
 
-void itime_(hrptr, minptr, secptr)
-integer *hrptr;
-integer *minptr;
-integer *secptr;
+void itime_(integer *hrptr, integer *minptr, integer *secptr)
 {
-	time_t timebuf;
-	struct tm *tmptr;
+    time_t timebuf;
+    struct tm *tmptr;
 
-	time(&timebuf);
-	tmptr = localtime(&timebuf);
-	
-	*hrptr  = tmptr->tm_hour;
-	*minptr = tmptr->tm_min;
-	*secptr = tmptr->tm_sec;
+    time(&timebuf);
+    tmptr = localtime(&timebuf);
+
+    *hrptr  = tmptr->tm_hour;
+    *minptr = tmptr->tm_min;
+    *secptr = tmptr->tm_sec;
 }
 
 /* Random number generator */
 
-integer rnd_(maxval)
-integer maxval;
+integer rnd_(integer maxval)
 {
-	return rand() % maxval;
+    return rand() % maxval;
 }
 
 /* Terminal support routines for dungeon */
@@ -158,10 +154,10 @@ void more_init()
 
     term = getenv("TERM");
     if (term == NULL)
-	crows = 0;
+        crows = 0;
     else {
-	tgetent(buf, term);
-	crows = tgetnum("li");
+        tgetent(buf, term);
+        crows = tgetnum("li");
     }
 
 #else /* ! MORE_TERMCAP */
@@ -173,7 +169,7 @@ void more_init()
     if (i != 1)
         crows = 0;
     else
-	crows = lines;
+        crows = lines;
 
 #else /* ! MORE_TERMINFO */
 #ifdef MORE_AMOS
@@ -181,10 +177,10 @@ void more_init()
     trm_char st;
 
     if (isatty(fileno(stdin)) == 0)
-	crows = 0;
+        crows = 0;
     else {
-	    trmchr(&st, 0);
-	    crows = st.row;
+        trmchr(&st, 0);
+        crows = st.row;
     }
 
 #else /* ! MORE_AMOS */
@@ -205,19 +201,18 @@ void more_init()
  * probably don't).
  */
 
-void more_output(z)
-const char *z;
+void more_output(const char *z)
 {
     if (crows > 0  &&  coutput > crows - 2) {
-	printf("Press return to continue: ");
-	(void) fflush(stdout);
-	while (getchar() != '\n')
-	    ;
-	coutput = 0;
+        printf("Press return to continue: ");
+        (void) fflush(stdout);
+        while (getchar() != '\n')
+            ;
+        coutput = 0;
     }
 
     if (z != NULL)
-	printf("%s\n", z);
+        printf("%s\n", z);
 
     coutput++;
 }
