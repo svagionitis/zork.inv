@@ -79,7 +79,7 @@ static void rdpartialints(integer c, integer *pi, FILE *indxfile)
 
 /* Read a number of one byte flags from the index file */
 
-static void rdflags(integer c, integer *pf, FILE *indxfile)
+static void rdflags(integer c, logical *pf, FILE *indxfile)
 {
     while (c-- != 0)
 	*pf++ = getc(indxfile);
