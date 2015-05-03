@@ -144,8 +144,21 @@ L1000:
     rdline_(input_1.inbuf, 0);
     ++state_1.moves;
 /* 						!CHARGE FOR MOVES. */
-    if (strcmp(input_1.inbuf, "ECHO") != 0)
-        goto L1300;
+    if (strcmp(input_1.inbuf, "ECHO") != 0) {
+        prsvec_1.prswon = parse_(input_1.inbuf, 0);
+        if (! prsvec_1.prswon ||
+            prsvec_1.prsa != vindex_1.walkw) {
+            more_output(input_1.inbuf);
+            play_1.telflg = TRUE_;
+/* 						!INDICATE OUTPUT. */
+            goto L1000;
+/* 						!MORE ECHO ROOM. */
+        }
+
+        if (findxt_(prsvec_1.prso, play_1.here))
+            goto L300;
+/* 						!VALID EXIT? */
+    }
 
     rspeak_(571);
 /* 						!KILL THE ECHO. */
@@ -157,84 +170,78 @@ L1000:
 /* 						!FORCE NEW INPUT. */
     goto L400;
 
-L1300:
-    prsvec_1.prswon = parse_(input_1.inbuf, 0);
-    if (! prsvec_1.prswon || prsvec_1.prsa != vindex_1.walkw)
-        goto L1400;
 
-    if (findxt_(prsvec_1.prso, play_1.here))
-        goto L300;
-/* 						!VALID EXIT? */
-
-L1400:
-    more_output(input_1.inbuf);
-    play_1.telflg = TRUE_;
-/* 						!INDICATE OUTPUT. */
-    goto L1000;
-/* 						!MORE ECHO ROOM. */
 /* GAME, PAGE 4 */
 
 /* SPECIAL CASE-- TELL <ACTOR>, NEW COMMAND */
 /* NOTE THAT WE CANNOT BE IN THE ECHO ROOM. */
 
 L2000:
-    if ((objcts_1.oflag2[prsvec_1.prso - 1] & ACTRBT) != 0)
-        goto L2100;
+    if ((objcts_1.oflag2[prsvec_1.prso - 1] & ACTRBT) != 0) {
+        play_1.winner = oactor_(prsvec_1.prso);
+    /* 						!NEW PLAYER. */
+        play_1.here = advs_1.aroom[play_1.winner - 1];
+    /* 						!NEW LOCATION. */
+        if (prsvec_1.prscon <= 1) {
+            i = 341;
+    /* 						!FAILS. */
+            if (play_1.telflg)
+                i = 604;
+    /* 						!GIVE RESPONSE. */
+            rspeak_(i);
+        }
+    /* 						!ANY INPUT? */
+        if (parse_(input_1.inbuf, 1)) {
+            if (aappli_(advs_1.aactio[play_1.winner - 1])) {
+                xendmv_(play_1.telflg);
+        /* 						!DO END OF MOVE. */
+
+                play_1.winner = aindex_1.player;
+        /* 						!RESTORE STATE. */
+                play_1.here = advs_1.aroom[play_1.winner - 1];
+                goto L350;
+        /* 						!DONE. */
+            }
+        /* 						!ACTOR HANDLE? */
+            if (xvehic_(1)) {
+                xendmv_(play_1.telflg);
+        /* 						!DO END OF MOVE. */
+
+                play_1.winner = aindex_1.player;
+        /* 						!RESTORE STATE. */
+                play_1.here = advs_1.aroom[play_1.winner - 1];
+                goto L350;
+        /* 						!DONE. */
+            }
+        /* 						!VEHICLE HANDLE? */
+            if (prsvec_1.prso == oindex_1.valua ||
+                prsvec_1.prso == oindex_1.every) {
+
+                valuac_(oindex_1.valua);
+        /* 						!ALL OR VALUABLES. */
+                goto L350;
+            }
+
+            if (! vappli_(prsvec_1.prsa)) {
+                xendmv_(play_1.telflg);
+        /* 						!DO END OF MOVE. */
+
+                play_1.winner = aindex_1.player;
+        /* 						!RESTORE STATE. */
+                play_1.here = advs_1.aroom[play_1.winner - 1];
+                goto L350;
+        /* 						!DONE. */
+            }
+        /* 						!VERB HANDLE? */
+        /* L2350: */
+            f = rappli_(rooms_1.ractio[play_1.here - 1]);
+        }
+    }
 
     rspeak_(602);
 /* 						!CANT DO IT. */
     goto L350;
 /* 						!VAPPLI SUCCEEDS. */
-
-L2100:
-    play_1.winner = oactor_(prsvec_1.prso);
-/* 						!NEW PLAYER. */
-    play_1.here = advs_1.aroom[play_1.winner - 1];
-/* 						!NEW LOCATION. */
-    if (prsvec_1.prscon <= 1)
-        goto L2700;
-/* 						!ANY INPUT? */
-    if (parse_(input_1.inbuf, 1))
-        goto L2150;
-L2700:
-    i = 341;
-/* 						!FAILS. */
-    if (play_1.telflg)
-        i = 604;
-/* 						!GIVE RESPONSE. */
-    rspeak_(i);
-L2600:
-    play_1.winner = aindex_1.player;
-/* 						!RESTORE STATE. */
-    play_1.here = advs_1.aroom[play_1.winner - 1];
-    goto L350;
-
-L2150:
-    if (aappli_(advs_1.aactio[play_1.winner - 1]))
-        goto L2400;
-/* 						!ACTOR HANDLE? */
-    if (xvehic_(1))
-        goto L2400;
-/* 						!VEHICLE HANDLE? */
-    if (prsvec_1.prso == oindex_1.valua || prsvec_1.prso == oindex_1.every)
-        goto L2900;
-
-    if (! vappli_(prsvec_1.prsa))
-        goto L2400;
-/* 						!VERB HANDLE? */
-/* L2350: */
-    f = rappli_(rooms_1.ractio[play_1.here - 1]);
-
-L2400:
-    xendmv_(play_1.telflg);
-/* 						!DO END OF MOVE. */
-    goto L2600;
-/* 						!DONE. */
-
-L2900:
-    valuac_(oindex_1.valua);
-/* 						!ALL OR VALUABLES. */
-    goto L350;
 
 } /* game_ */
 
