@@ -152,3 +152,10 @@ Next following a number of compilation flags which are useful:
 Source:
 *   https://gcc.gnu.org/onlinedocs/gcc-4.8.4/gcc/Warning-Options.html#Warning%20Options
 *   http://stackoverflow.com/questions/3375697/useful-gcc-flags-for-c
+
+
+C Operator Precedence
+======================
+
+Source:
+*   http://en.cppreference.com/w/c/language/operator_precedence
