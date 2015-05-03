@@ -13,7 +13,6 @@ logical aappli_(integer ri)
     logical ret_val;
 
     /* Local variables */
-    logical f;
     integer i;
 
     if (ri == 0)
@@ -46,11 +45,7 @@ L1000:
 /* 						!ROBOT RAISED CAGE. */
     play_1.winner = aindex_1.player;
 /* 						!RESET FOR PLAYER. */
-    f = moveto_(rindex_1.cager, play_1.winner);
-    if (f == FALSE_) {
-        ret_val = FALSE_;
-        return ret_val;
-    }
+    moveto_(rindex_1.cager, play_1.winner);
 /* 						!MOVE TO NEW ROOM. */
     newsta_(oindex_1.cage, 567, rindex_1.cager, 0, 0);
 /* 						!INSTALL CAGE IN ROOM. */
