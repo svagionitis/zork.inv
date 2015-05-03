@@ -81,7 +81,7 @@ logical nl;
 
     x = ((- x) - 1) * 8;
     if (fseek(dbfile, x + (long)rmsg_1.mrloc, SEEK_SET) == EOF) {
-	fprintf(stderr, "Error seeking database loc %d\n", x);
+	fprintf(stderr, "Error seeking database loc %ld\n", x);
 	exit_();
     }
 
@@ -93,7 +93,7 @@ logical nl;
 
 	i = getc(dbfile);
 	if (i == EOF) {
-	    fprintf(stderr, "Error reading database loc %d\n", x);
+	    fprintf(stderr, "Error reading database loc %ld\n", x);
 	    exit_();
 	}
 	i ^= zkey[x & 0xf] ^ (x & 0xff);
@@ -111,7 +111,7 @@ logical nl;
 	    iloc = ftell(dbfile);
 	    rspsb2nl_(y, 0, 0, 0);
 	    if (fseek(dbfile, iloc, SEEK_SET) == EOF) {
-		fprintf(stderr, "Error seeking database loc %d\n", iloc);
+		fprintf(stderr, "Error seeking database loc %ld\n", iloc);
 		exit_();
 	    }
 	    y = z;
@@ -280,7 +280,6 @@ integer desc;
 
     /* Local variables */
     integer nonofl;
-    logical f;
     integer i, j;
 
     rspeak_(desc);
@@ -329,7 +328,7 @@ L100:
     ++state_1.deaths;
     scrupd_(- 10);
 /* 						!CHARGE TEN POINTS. */
-    f = moveto_(rindex_1.fore1, play_1.winner);
+    moveto_(rindex_1.fore1, play_1.winner);
 /* 						!REPOSITION HIM. */
     findex_1.egyptf = TRUE_;
 /* 						!RESTORE COFFIN. */
@@ -538,8 +537,9 @@ L300:
 /* 						!OBJ ONLY? */
     i = rooms_1.rdesc2[play_1.here - 1];
 /* 						!ASSUME SHORT DESC. */
-    if (full == 0 && (findex_1.superf || (rooms_1.rflag[play_1.here - 1] & 
-	    RSEEN) != 0 && findex_1.brieff)) {
+    if (full == 0 &&
+        (findex_1.superf ||
+         ((rooms_1.rflag[play_1.here - 1] & RSEEN) != 0 && findex_1.brieff))) {
 	goto L400;
     }
 
