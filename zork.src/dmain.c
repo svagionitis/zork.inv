@@ -13,6 +13,11 @@
 /* void changed to int, Volker Blasius, 11jul93 */
 int main(int argc, char *argv[])
 {
+    // Silence the compiler warnings
+    // by using argc and argv.
+    argc = argc;
+    argv[argc] = NULL;
+
 /* 1) INITIALIZE DATA STRUCTURES */
 /* 2) PLAY GAME */
 
@@ -21,6 +26,8 @@ int main(int argc, char *argv[])
     }
 /* 						!IF INIT, PLAY GAME. */
     exit_();
+
+    return 0;
 /* 						!DONE */
 } /* MAIN__ */
 
