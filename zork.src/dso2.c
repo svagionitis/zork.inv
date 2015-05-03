@@ -56,7 +56,7 @@ L100:
     }
 /* 						!IN BUCKET? */
     nlv = (rooms_1.rflag[nr - 1] & bits) == 0;
-    if (! lnr && nlv || lnr && lhr && nlv && bits != RLAND) {
+    if ((! lnr && nlv) || (lnr && lhr && nlv && bits) != RLAND) {
 	goto L800;
     }
 
