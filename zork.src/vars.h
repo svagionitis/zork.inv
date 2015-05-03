@@ -16,6 +16,10 @@
 #define EXTERN extern
 #endif
 
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
 EXTERN struct {
     integer prsa, prsi, prso;
     logical prswon;
