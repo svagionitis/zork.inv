@@ -127,3 +127,28 @@ In order to remove the non-printable `^M` and `^Z` for all the files, we execute
 	for file in $(ls); do cat ${file} | tr -d '\r' | tr -d '\15\32' > ${file}.unx; mv -f ${file}.unx ${file}; done
 
 
+Useful compilation flags (CFLAGS) for gcc 4.8.4 (mostly for warnings)
+=====================================================================
+
+Next following a number of compilation flags which are useful:
+*   `-Wall`: This enables all the warnings about constructions that some users consider questionable, and that are easy to avoid
+    (or modify to prevent the warning), even in conjunction with macros. See
+    [documentation](https://gcc.gnu.org/onlinedocs/gcc-4.8.4/gcc/Warning-Options.html#Warning%20Options) for more info.
+*   `-Wextra`: This enables some extra warning flags that are not enabled by `-Wall`. See documentation for more info.
+*   `-Wshadow`: Warn whenever a local variable or type declaration shadows another variable, parameter, type, or class member (in C++),
+    or whenever a built-in function is shadowed. Note that in C++, the compiler warns if a local variable shadows an explicit typedef,
+    but not if it shadows a struct/class/enum.
+*   `-Wstrict-prototypes`: Warn if a function is declared or defined without specifying the argument types. (An old-style function definition
+    is permitted without a warning if preceded by a declaration that specifies the argument types.)
+*   `-Wmissing-prototypes`: Warn if a global function is defined without a previous prototype declaration. This warning is issued even if the definition
+    itself provides a prototype. Use this option to detect global functions that do not have a matching prototype declaration in a header file.
+    This option is not valid for C++ because all function declarations provide prototypes and a non-matching declaration will declare an overload rather
+    than conflict with an earlier declaration.
+*   `-Wfloat-equal`: Warn if floating-point values are used in equality comparisons. (We don''t have any floating numbers, but it''s good to know)
+*   `-Wcast-align`: Warn whenever a pointer is cast such that the required alignment of the target is increased. For example, warn if a `char *` is cast
+    to an `int *` on machines where integers can only be accessed at two- or four-byte boundaries.
+*   `-Wpedantic`: Issue all the warnings demanded by strict ISO C and ISO C++.
+
+Source:
+*   https://gcc.gnu.org/onlinedocs/gcc-4.8.4/gcc/Warning-Options.html#Warning%20Options
+*   http://stackoverflow.com/questions/3375697/useful-gcc-flags-for-c
