@@ -7,11 +7,9 @@
 #include "funcs.h"
 #include "vars.h"
 
-static void litint_ P((integer, integer *, integer, const integer *,
-		       integer));
+static void litint_ P((integer, integer *, integer, const integer *, integer));
 
-void cevapp_(ri)
-integer ri;
+void cevapp_(integer ri)
 {
     /* Initialized data */
 
@@ -25,35 +23,35 @@ integer ri;
     logical f;
     integer i, j, bc, br;
 
-    if (ri == 0) {
-	return;
-    }
+    if (ri == 0)
+        return;
+
 /* 						!IGNORE DISABLED. */
     switch (ri) {
-	case 1:  goto L1000;
-	case 2:  goto L2000;
-	case 3:  goto L3000;
-	case 4:  goto L4000;
-	case 5:  goto L5000;
-	case 6:  goto L6000;
-	case 7:  goto L7000;
-	case 8:  goto L8000;
-	case 9:  goto L9000;
-	case 10:  goto L10000;
-	case 11:  goto L11000;
-	case 12:  goto L12000;
-	case 13:  goto L13000;
-	case 14:  goto L14000;
-	case 15:  goto L15000;
-	case 16:  goto L16000;
-	case 17:  goto L17000;
-	case 18:  goto L18000;
-	case 19:  goto L19000;
-	case 20:  goto L20000;
-	case 21:  goto L21000;
-	case 22:  goto L22000;
-	case 23:  goto L23000;
-	case 24:  goto L24000;
+        case 1:  goto L1000;
+        case 2:  goto L2000;
+        case 3:  goto L3000;
+        case 4:  goto L4000;
+        case 5:  goto L5000;
+        case 6:  goto L6000;
+        case 7:  goto L7000;
+        case 8:  goto L8000;
+        case 9:  goto L9000;
+        case 10:  goto L10000;
+        case 11:  goto L11000;
+        case 12:  goto L12000;
+        case 13:  goto L13000;
+        case 14:  goto L14000;
+        case 15:  goto L15000;
+        case 16:  goto L16000;
+        case 17:  goto L17000;
+        case 18:  goto L18000;
+        case 19:  goto L19000;
+        case 20:  goto L20000;
+        case 21:  goto L21000;
+        case 22:  goto L22000;
+        case 23:  goto L23000;
+        case 24:  goto L24000;
     }
     bug_(3, ri);
 
@@ -64,9 +62,9 @@ L1000:
     i__1 = 0, i__2 = advs_1.astren[aindex_1.player - 1] + 1;
     advs_1.astren[aindex_1.player - 1] = min(i__1,i__2);
 /* 						!RECOVER. */
-    if (advs_1.astren[aindex_1.player - 1] >= 0) {
-	return;
-    }
+    if (advs_1.astren[aindex_1.player - 1] >= 0)
+        return;
+
 /* 						!FULLY RECOVERED? */
     cevent_1.ctick[cindex_1.cevcur - 1] = 30;
 /* 						!NO, WAIT SOME MORE. */
@@ -82,18 +80,18 @@ L2000:
 /* 						!DESCRIBE. */
     ++findex_1.rvmnt;
 /* 						!RAISE WATER LEVEL. */
-    if (findex_1.rvmnt <= 16) {
-	return;
-    }
+    if (findex_1.rvmnt <= 16)
+        return;
+
 /* 						!IF NOT FULL, EXIT. */
     cevent_1.ctick[cindex_1.cevmnt - 1] = 0;
 /* 						!FULL, DISABLE CLOCK. */
     rooms_1.rflag[rindex_1.maint - 1] |= RMUNG;
     rrand[rindex_1.maint - 1] = 80;
 /* 						!SAY IT IS FULL OF WATER. */
-    if (play_1.here == rindex_1.maint) {
-	jigsup_(81);
-    }
+    if (play_1.here == rindex_1.maint)
+        jigsup_(81);
+
 /* 						!DROWN HIM IF PRESENT. */
     return;
 
@@ -127,48 +125,47 @@ L6000:
 /* 						!RESCHEDULE INTERRUPT. */
     f = advs_1.avehic[play_1.winner - 1] == oindex_1.ballo;
 /* 						!SEE IF IN BALLOON. */
-    if (state_1.bloc == rindex_1.vlbot) {
-	goto L6800;
-    }
+    if (state_1.bloc == rindex_1.vlbot)
+        goto L6800;
+
 /* 						!AT BOTTOM? */
-    if (state_1.bloc == rindex_1.ledg2 || state_1.bloc == rindex_1.ledg3 || 
-	    state_1.bloc == rindex_1.ledg4 || state_1.bloc == rindex_1.vlbot) 
-	    {
-	goto L6700;
-    }
+    if (state_1.bloc == rindex_1.ledg2 || state_1.bloc == rindex_1.ledg3 ||
+        state_1.bloc == rindex_1.ledg4 || state_1.bloc == rindex_1.vlbot)
+        goto L6700;
+
 /* 						!ON LEDGE? */
-    if ((objcts_1.oflag2[oindex_1.recep - 1] & OPENBT) != 0 && 
-	    findex_1.binff != 0) {
-	goto L6500;
-    }
+    if ((objcts_1.oflag2[oindex_1.recep - 1] & OPENBT) != 0 &&
+        findex_1.binff != 0)
+        goto L6500;
+
 
 /* BALLOON IS IN MIDAIR AND IS DEFLATED (OR HAS RECEPTACLE CLOSED). */
 /* FALL TO NEXT ROOM. */
 
-    if (state_1.bloc != rindex_1.vair1) {
-	goto L6300;
-    }
+    if (state_1.bloc != rindex_1.vair1)
+        goto L6300;
+
 /* 						!IN VAIR1? */
     state_1.bloc = rindex_1.vlbot;
 /* 						!YES, NOW AT VLBOT. */
     newsta_(oindex_1.ballo, 0, state_1.bloc, 0, 0);
-    if (f) {
-	goto L6200;
-    }
+    if (f)
+        goto L6200;
+
 /* 						!IN BALLOON? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
 	rspeak_(530);
-    }
+
 /* 						!ON LEDGE, DESCRIBE. */
     return;
 
 L6200:
     f = moveto_(state_1.bloc, play_1.winner);
 /* 						!MOVE HIM. */
-    if (findex_1.binff == 0) {
-	goto L6250;
-    }
+    if (findex_1.binff == 0)
+        goto L6250;
+
 /* 						!IN BALLOON.  INFLATED? */
     rspeak_(531);
 /* 						!YES, LANDED. */
@@ -194,14 +191,14 @@ L6300:
     --state_1.bloc;
 /* 						!NOT IN VAIR1, DESCEND. */
     newsta_(oindex_1.ballo, 0, state_1.bloc, 0, 0);
-    if (f) {
-	goto L6400;
-    }
+    if (f)
+        goto L6400;
+
 /* 						!IS HE IN BALLOON? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	rspeak_(533);
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        rspeak_(533);
+
 /* 						!IF ON LEDGE, DESCRIBE. */
     return;
 
@@ -217,9 +214,9 @@ L6400:
 /* 						! */
 
 L6500:
-    if (state_1.bloc != rindex_1.vair4) {
-	goto L6600;
-    }
+    if (state_1.bloc != rindex_1.vair4)
+        goto L6600;
+
 /* 						!AT VAIR4? */
     cevent_1.ctick[cindex_1.cevbrn - 1] = 0;
     cevent_1.ctick[cindex_1.cevbal - 1] = 0;
@@ -231,14 +228,14 @@ L6500:
 /* 						!BALLOON & CONTENTS DIE. */
     newsta_(oindex_1.dball, 0, state_1.bloc, 0, 0);
 /* 						!SUBSTITUTE DEAD BALLOON. */
-    if (f) {
-	goto L6550;
-    }
+    if (f)
+        goto L6550;
+
 /* 						!WAS HE IN IT? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	rspeak_(535);
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        rspeak_(535);
+
 /* 						!IF HE CAN SEE, DESCRIBE. */
     return;
 
@@ -251,14 +248,14 @@ L6600:
     ++state_1.bloc;
 /* 						!NOT AT VAIR4, GO UP. */
     newsta_(oindex_1.ballo, 0, state_1.bloc, 0, 0);
-    if (f) {
-	goto L6650;
-    }
+    if (f)
+        goto L6650;
+
 /* 						!IN BALLOON? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	rspeak_(537);
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        rspeak_(537);
+
 /* 						!CAN HE SEE IT? */
     return;
 
@@ -276,14 +273,14 @@ L6700:
     state_1.bloc += rindex_1.vair2 - rindex_1.ledg2;
 /* 						!MOVE TO MIDAIR. */
     newsta_(oindex_1.ballo, 0, state_1.bloc, 0, 0);
-    if (f) {
-	goto L6750;
-    }
+    if (f)
+        goto L6750;
+
 /* 						!IN BALLOON? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	rspeak_(539);
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        rspeak_(539);
+
 /* 						!NO, STRANDED. */
     cevent_1.ctick[cindex_1.cevvlg - 1] = 10;
 /* 						!MATERIALIZE GNOME. */
@@ -300,22 +297,22 @@ L6750:
 /* AT BOTTOM, GO UP IF INFLATED, DO NOTHING IF DEFLATED. */
 
 L6800:
-    if (findex_1.binff == 0 || ! ((objcts_1.oflag2[oindex_1.recep - 1] & 
-	    OPENBT) != 0)) {
-	return;
-    }
+    if (findex_1.binff == 0 ||
+        ! ((objcts_1.oflag2[oindex_1.recep - 1] & OPENBT) != 0))
+        return;
+
     state_1.bloc = rindex_1.vair1;
 /* 						!INFLATED AND OPEN, */
     newsta_(oindex_1.ballo, 0, state_1.bloc, 0, 0);
 /* 						!GO UP TO VAIR1. */
-    if (f) {
-	goto L6850;
-    }
+    if (f)
+        goto L6850;
+
 /* 						!IN BALLOON? */
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	rspeak_(541);
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        rspeak_(541);
+
 /* 						!IF CAN SEE, DESCRIBE. */
     return;
 
@@ -333,10 +330,10 @@ L7000:
     i__1 = objcts_1.olnt;
     for (i = 1; i <= i__1; ++i) {
 /* 						!FIND BURNING OBJECT */
-	if (oindex_1.recep == objcts_1.ocan[i - 1] && (objcts_1.oflag1[i - 1] 
-		& FLAMBT) != 0) {
-	    goto L7200;
-	}
+        if (oindex_1.recep == objcts_1.ocan[i - 1] &&
+            (objcts_1.oflag1[i - 1] & FLAMBT) != 0)
+            goto L7200;
+
 /* L7100: */
     }
     bug_(4, 0);
@@ -346,33 +343,33 @@ L7200:
 /* 						!VANISH OBJECT. */
     findex_1.binff = 0;
 /* 						!UNINFLATED. */
-    if (play_1.here == state_1.bloc) {
-	rspsub_(292, objcts_1.odesc2[i - 1]);
-    }
+    if (play_1.here == state_1.bloc)
+        rspsub_(292, objcts_1.odesc2[i - 1]);
+
 /* 						!DESCRIBE. */
     return;
 
 /* CEV8--	FUSE FUNCTION */
 
 L8000:
-    if (objcts_1.ocan[oindex_1.fuse - 1] != oindex_1.brick) {
-	goto L8500;
-    }
+    if (objcts_1.ocan[oindex_1.fuse - 1] != oindex_1.brick)
+        goto L8500;
+
 /* 						!IGNITED BRICK? */
     br = objcts_1.oroom[oindex_1.brick - 1];
 /* 						!GET BRICK ROOM. */
     bc = objcts_1.ocan[oindex_1.brick - 1];
 /* 						!GET CONTAINER. */
-    if (br == 0 && bc != 0) {
-	br = objcts_1.oroom[bc - 1];
-    }
+    if (br == 0 && bc != 0)
+        br = objcts_1.oroom[bc - 1];
+
     newsta_(oindex_1.fuse, 0, 0, 0, 0);
 /* 						!KILL FUSE. */
     newsta_(oindex_1.brick, 0, 0, 0, 0);
 /* 						!KILL BRICK. */
-    if (br != 0 && br != play_1.here) {
-	goto L8100;
-    }
+    if (br != 0 && br != play_1.here)
+        goto L8100;
+
 /* 						!BRICK ELSEWHERE? */
 
     rooms_1.rflag[play_1.here - 1] |= RMUNG;
@@ -389,13 +386,13 @@ L8100:
 /* 						!SAVE ROOM THAT BLEW. */
     cevent_1.ctick[cindex_1.cevsaf - 1] = 5;
 /* 						!SET SAFE INTERRUPT. */
-    if (br != rindex_1.msafe) {
-	goto L8200;
-    }
+    if (br != rindex_1.msafe)
+        goto L8200;
+
 /* 						!BLEW SAFE ROOM? */
-    if (bc != oindex_1.sslot) {
-	return;
-    }
+    if (bc != oindex_1.sslot)
+        return;
+
 /* 						!WAS BRICK IN SAFE? */
     newsta_(oindex_1.sslot, 0, 0, 0, 0);
 /* 						!KILL SLOT. */
@@ -408,31 +405,30 @@ L8200:
     i__1 = objcts_1.olnt;
     for (i = 1; i <= i__1; ++i) {
 /* 						!BLEW WRONG ROOM. */
-	if (qhere_(i, br) && (objcts_1.oflag1[i - 1] & TAKEBT) != 
-		0) {
-	    newsta_(i, 0, 0, 0, 0);
-	}
+        if (qhere_(i, br) && (objcts_1.oflag1[i - 1] & TAKEBT) != 0)
+            newsta_(i, 0, 0, 0, 0);
+
 /* L8250: */
     }
-    if (br != rindex_1.lroom) {
-	return;
-    }
+    if (br != rindex_1.lroom)
+        return;
+
 /* 						!BLEW LIVING ROOM? */
     i__1 = objcts_1.olnt;
     for (i = 1; i <= i__1; ++i) {
-	if (objcts_1.ocan[i - 1] == oindex_1.tcase) {
-	    newsta_(i, 0, 0, 0, 0);
-	}
+        if (objcts_1.ocan[i - 1] == oindex_1.tcase)
+            newsta_(i, 0, 0, 0, 0);
+
 /* 						!KILL TROPHY CASE. */
 /* L8300: */
     }
     return;
 
 L8500:
-    if (qhere_(oindex_1.fuse, play_1.here) || objcts_1.oadv[oindex_1.fuse - 
-	    1] == play_1.winner) {
-	rspeak_(152);
-    }
+    if (qhere_(oindex_1.fuse, play_1.here) ||
+        objcts_1.oadv[oindex_1.fuse - 1] == play_1.winner)
+        rspeak_(152);
+
     newsta_(oindex_1.fuse, 0, 0, 0, 0);
 /* 						!KILL FUSE. */
     return;
@@ -443,27 +439,27 @@ L8500:
 L9000:
     rooms_1.rflag[rindex_1.ledg4 - 1] |= RMUNG;
     rrand[rindex_1.ledg4 - 1] = 109;
-    if (play_1.here == rindex_1.ledg4) {
-	goto L9100;
-    }
+    if (play_1.here == rindex_1.ledg4)
+        goto L9100;
+
 /* 						!WAS HE THERE? */
     rspeak_(110);
 /* 						!NO, NARROW ESCAPE. */
     return;
 
 L9100:
-    if (advs_1.avehic[play_1.winner - 1] != 0) {
-	goto L9200;
-    }
+    if (advs_1.avehic[play_1.winner - 1] != 0)
+        goto L9200;
+
 /* 						!IN VEHICLE? */
     jigsup_(111);
 /* 						!NO, DEAD. */
     return;
 
 L9200:
-    if (findex_1.btief != 0) {
-	goto L9300;
-    }
+    if (findex_1.btief != 0)
+        goto L9300;
+
 /* 						!TIED TO LEDGE? */
     rspeak_(112);
 /* 						!NO, NO PLACE TO LAND. */
@@ -489,24 +485,24 @@ L9300:
 L10000:
     rooms_1.rflag[state_1.mungrm - 1] |= RMUNG;
     rrand[state_1.mungrm - 1] = 114;
-    if (play_1.here == state_1.mungrm) {
-	goto L10100;
-    }
+    if (play_1.here == state_1.mungrm)
+        goto L10100;
+
 /* 						!IS HE PRESENT? */
     rspeak_(115);
 /* 						!LET HIM KNOW. */
-    if (state_1.mungrm == rindex_1.msafe) {
-	cevent_1.ctick[cindex_1.cevled - 1] = 8;
-    }
+    if (state_1.mungrm == rindex_1.msafe)
+        cevent_1.ctick[cindex_1.cevled - 1] = 8;
+
 /* 						!START LEDGE CLOCK. */
     return;
 
 L10100:
     i = 116;
 /* 						!HE'S DEAD, */
-    if ((rooms_1.rflag[play_1.here - 1] & RHOUSE) != 0) {
-	i = 117;
-    }
+    if ((rooms_1.rflag[play_1.here - 1] & RHOUSE) != 0)
+        i = 117;
+
     jigsup_(i);
 /* 						!LET HIM KNOW. */
     return;
@@ -515,10 +511,10 @@ L10100:
 /* CEV11--	VOLCANO GNOME */
 
 L11000:
-    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 || 
-	    play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot) {
-	goto L11100;
-    }
+    if (play_1.here == rindex_1.ledg2 || play_1.here == rindex_1.ledg3 ||
+        play_1.here == rindex_1.ledg4 || play_1.here == rindex_1.vlbot)
+        goto L11100;
+
 /* 						!IS HE ON LEDGE? */
     cevent_1.ctick[cindex_1.cevvlg - 1] = 1;
 /* 						!NO, WAIT A WHILE. */
@@ -539,9 +535,9 @@ L12000:
 /* CEV13--	BUCKET. */
 
 L13000:
-    if (objcts_1.ocan[oindex_1.water - 1] == oindex_1.bucke) {
-	newsta_(oindex_1.water, 0, 0, 0, 0);
-    }
+    if (objcts_1.ocan[oindex_1.water - 1] == oindex_1.bucke)
+        newsta_(oindex_1.water, 0, 0, 0, 0);
+
     return;
 
 /* CEV14--	SPHERE.  IF EXPIRES, HE'S TRAPPED. */
@@ -566,23 +562,24 @@ L15000:
 /* CEV16--	FOREST MURMURS */
 
 L16000:
-    cevent_1.cflag[cindex_1.cevfor - 1] = play_1.here == rindex_1.mtree || 
-	    play_1.here >= rindex_1.fore1 && play_1.here < rindex_1.clear;
-    if (cevent_1.cflag[cindex_1.cevfor - 1] && prob_(10, 10)) {
-	rspeak_(635);
-    }
+    cevent_1.cflag[cindex_1.cevfor - 1] = play_1.here == rindex_1.mtree ||
+                                          (play_1.here >= rindex_1.fore1 &&
+                                           play_1.here < rindex_1.clear);
+    if (cevent_1.cflag[cindex_1.cevfor - 1] && prob_(10, 10))
+        rspeak_(635);
+
     return;
 
 /* CEV17--	SCOL ALARM */
 
 L17000:
-    if (play_1.here == rindex_1.bktwi) {
-	cevent_1.cflag[cindex_1.cevzgi - 1] = TRUE_;
-    }
+    if (play_1.here == rindex_1.bktwi)
+        cevent_1.cflag[cindex_1.cevzgi - 1] = TRUE_;
+
 /* 						!IF IN TWI, GNOME. */
-    if (play_1.here == rindex_1.bkvau) {
-	jigsup_(636);
-    }
+    if (play_1.here == rindex_1.bkvau)
+        jigsup_(636);
+
 /* 						!IF IN VAU, DEAD. */
     return;
 
@@ -593,9 +590,9 @@ L18000:
 /* 						!EXITS, TOO. */
     newsta_(oindex_1.zgnom, 0, rindex_1.bktwi, 0, 0);
 /* 						!PLACE IN TWI. */
-    if (play_1.here == rindex_1.bktwi) {
-	rspeak_(637);
-    }
+    if (play_1.here == rindex_1.bktwi)
+        rspeak_(637);
+
 /* 						!ANNOUNCE. */
     return;
 
@@ -604,9 +601,9 @@ L18000:
 L19000:
     newsta_(oindex_1.zgnom, 0, 0, 0, 0);
 /* 						!VANISH. */
-    if (play_1.here == rindex_1.bktwi) {
-	rspeak_(638);
-    }
+    if (play_1.here == rindex_1.bktwi)
+        rspeak_(638);
+
 /* 						!ANNOUNCE. */
     return;
 /* CEVAPP, PAGE 8 */
@@ -614,17 +611,17 @@ L19000:
 /* CEV20--	START OF ENDGAME */
 
 L20000:
-    if (findex_1.spellf) {
-	goto L20200;
-    }
+    if (findex_1.spellf)
+        goto L20200;
+
 /* 						!SPELL HIS WAY IN? */
-    if (play_1.here != rindex_1.crypt) {
-	return;
-    }
+    if (play_1.here != rindex_1.crypt)
+        return;
+
 /* 						!NO, STILL IN TOMB? */
-    if (! lit_(play_1.here)) {
-	goto L20100;
-    }
+    if (! lit_(play_1.here))
+        goto L20100;
+
 /* 						!LIGHTS OFF? */
     cevent_1.ctick[cindex_1.cevste - 1] = 3;
 /* 						!RESCHEDULE. */
@@ -637,8 +634,7 @@ L20200:
     i__1 = objcts_1.olnt;
     for (i = 1; i <= i__1; ++i) {
 /* 						!STRIP HIM OF OBJS. */
-	newsta_(i, 0, objcts_1.oroom[i - 1], objcts_1.ocan[i - 1], 
-		0);
+        newsta_(i, 0, objcts_1.oroom[i - 1], objcts_1.ocan[i - 1], 0);
 /* L20300: */
     }
     newsta_(oindex_1.lamp, 0, 0, 0, aindex_1.player);
@@ -646,8 +642,7 @@ L20200:
     newsta_(oindex_1.sword, 0, 0, 0, aindex_1.player);
 /* 						!GIVE HIM SWORD. */
 
-    objcts_1.oflag1[oindex_1.lamp - 1] = (objcts_1.oflag1[oindex_1.lamp - 1] |
-	     LITEBT) & ~ ONBT;
+    objcts_1.oflag1[oindex_1.lamp - 1] = (objcts_1.oflag1[oindex_1.lamp - 1] | LITEBT) & ~ ONBT;
     objcts_1.oflag2[oindex_1.lamp - 1] |= TCHBT;
     cevent_1.cflag[cindex_1.cevlnt - 1] = FALSE_;
 /* 						!LAMP IS GOOD AS NEW. */
@@ -685,22 +680,22 @@ L21000:
 /* 						!BUTTON IS OUT. */
     findex_1.mropnf = FALSE_;
 /* 						!MIRROR IS CLOSED. */
-    if (play_1.here == rindex_1.mrant) {
-	rspeak_(728);
-    }
+    if (play_1.here == rindex_1.mrant)
+        rspeak_(728);
+
 /* 						!DESCRIBE BUTTON. */
-    if (play_1.here == rindex_1.inmir || mrhere_(play_1.here) == 1) {
-	rspeak_(729);
-    }
+    if (play_1.here == rindex_1.inmir || mrhere_(play_1.here) == 1)
+        rspeak_(729);
+
     return;
 /* CEVAPP, PAGE 9 */
 
 /* CEV22--	DOOR CLOSES. */
 
 L22000:
-    if (findex_1.wdopnf) {
-	rspeak_(730);
-    }
+    if (findex_1.wdopnf)
+        rspeak_(730);
+
 /* 						!DESCRIBE. */
     findex_1.wdopnf = FALSE_;
 /* 						!CLOSED. */
@@ -709,9 +704,9 @@ L22000:
 /* CEV23--	INQUISITOR'S QUESTION */
 
 L23000:
-    if (advs_1.aroom[aindex_1.player - 1] != rindex_1.fdoor) {
-	return;
-    }
+    if (advs_1.aroom[aindex_1.player - 1] != rindex_1.fdoor)
+        return;
+
 /* 						!IF PLAYER LEFT, DIE. */
     rspeak_(769);
     i__1 = findex_1.quesno + 770;
@@ -722,16 +717,17 @@ L23000:
 /* CEV24--	MASTER FOLLOWS */
 
 L24000:
-    if (advs_1.aroom[aindex_1.amastr - 1] == play_1.here) {
-	return;
-    }
+    if (advs_1.aroom[aindex_1.amastr - 1] == play_1.here)
+        return;
+
 /* 						!NO MOVEMENT, DONE. */
-    if (play_1.here != rindex_1.cell && play_1.here != rindex_1.pcell) {
-	goto L24100;
-    }
-    if (findex_1.follwf) {
-	rspeak_(811);
-    }
+    if (play_1.here != rindex_1.cell &&
+        play_1.here != rindex_1.pcell)
+        goto L24100;
+
+    if (findex_1.follwf)
+        rspeak_(811);
+
 /* 						!WONT GO TO CELLS. */
     findex_1.follwf = FALSE_;
     return;
@@ -744,10 +740,10 @@ L24100:
     i__1 = xsrch_1.xmax;
     i__2 = xsrch_1.xmin;
     for (j = xsrch_1.xmin; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
-	if (findxt_(j, advs_1.aroom[aindex_1.amastr - 1]) && curxt_1.xroom1 
-		== play_1.here) {
-	    i = 813;
-	}
+        if (findxt_(j, advs_1.aroom[aindex_1.amastr - 1]) &&
+            curxt_1.xroom1 == play_1.here)
+            i = 813;
+
 /* L24200: */
     }
     rspeak_(i);
@@ -763,12 +759,7 @@ L24100:
 
 /* DECLARATIONS */
 
-static void litint_(obj, ctr, cev, ticks, tickln)
-integer obj;
-integer *ctr;
-integer cev;
-const integer *ticks;
-integer tickln;
+static void litint_(integer obj, integer *ctr, integer cev, const integer *ticks, integer tickln)
 {
     /* Parameter adjustments */
     --ticks;
@@ -778,23 +769,22 @@ integer tickln;
 /* 						!ADVANCE STATE CNTR. */
     cevent_1.ctick[cev - 1] = ticks[*ctr];
 /* 						!RESET INTERRUPT. */
-    if (cevent_1.ctick[cev - 1] != 0) {
-	goto L100;
-    }
+    if (cevent_1.ctick[cev - 1] != 0)
+        goto L100;
+
 /* 						!EXPIRED? */
-    objcts_1.oflag1[obj - 1] &= ~ (LITEBT + FLAMBT + 
-	    ONBT);
-    if (objcts_1.oroom[obj - 1] == play_1.here || objcts_1.oadv[obj - 1] == 
-	    play_1.winner) {
+    objcts_1.oflag1[obj - 1] &= ~ (LITEBT + FLAMBT + ONBT);
+    if (objcts_1.oroom[obj - 1] == play_1.here ||
+        objcts_1.oadv[obj - 1] == play_1.winner)
 	rspsub_(293, objcts_1.odesc2[obj - 1]);
-    }
+
     return;
 
 L100:
-    if (objcts_1.oroom[obj - 1] == play_1.here || objcts_1.oadv[obj - 1] == 
-	    play_1.winner) {
-	rspeak_(ticks[*ctr + tickln / 2]);
-    }
+    if (objcts_1.oroom[obj - 1] == play_1.here ||
+        objcts_1.oadv[obj - 1] == play_1.winner)
+        rspeak_(ticks[*ctr + tickln / 2]);
+
     return;
 
 } /* litint_ */
