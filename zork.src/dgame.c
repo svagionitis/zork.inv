@@ -35,17 +35,16 @@ L100:
 /* 						!PLAYER MOVING. */
     play_1.telflg = FALSE_;
 /* 						!ASSUME NOTHING TOLD. */
-    if (prsvec_1.prscon <= 1) {
-	rdline_(input_1.inbuf, 1);
-    }
+    if (prsvec_1.prscon <= 1)
+        rdline_(input_1.inbuf, 1);
 
 #ifdef ALLOW_GDT
 
     if (strcmp(input_1.inbuf + prsvec_1.prscon - 1, "GDT") == 0) {
 /* 						!CALL ON GDT? */
-	gdt_();
+        gdt_();
 /* 						!YES, INVOKE. */
-	goto L100;
+        goto L100;
 /* 						!ONWARD. */
     }
 
@@ -53,39 +52,35 @@ L100:
 
     ++state_1.moves;
     prsvec_1.prswon = parse_(input_1.inbuf, 1);
-    if (! prsvec_1.prswon) {
-	goto L400;
-    }
+    if (! prsvec_1.prswon)
+        goto L400;
 /* 						!PARSE LOSES? */
-    if (xvehic_(1)) {
-	goto L400;
-    }
+    if (xvehic_(1))
+        goto L400;
 /* 						!VEHICLE HANDLE? */
 
-    if (prsvec_1.prsa == vindex_1.tellw) {
-	goto L2000;
-    }
+    if (prsvec_1.prsa == vindex_1.tellw)
+        goto L2000;
 /* 						!TELL? */
 L300:
-    if (prsvec_1.prso == oindex_1.valua || prsvec_1.prso == oindex_1.every) {
-	goto L900;
-    }
-    if (! vappli_(prsvec_1.prsa)) {
-	goto L400;
-    }
+    if (prsvec_1.prso == oindex_1.valua || prsvec_1.prso == oindex_1.every)
+        goto L900;
+
+    if (! vappli_(prsvec_1.prsa))
+        goto L400;
 /* 						!VERB OK? */
 L350:
-    if (! findex_1.echof && play_1.here == rindex_1.echor) {
-	goto L1000;
-    }
+    if (! findex_1.echof && play_1.here == rindex_1.echor)
+        goto L1000;
+
     f = rappli_(rooms_1.ractio[play_1.here - 1]);
 
 L400:
     xendmv_(play_1.telflg);
 /* 						!DO END OF MOVE. */
-    if (! lit_(play_1.here)) {
-	prsvec_1.prscon = 1;
-    }
+    if (! lit_(play_1.here))
+        prsvec_1.prscon = 1;
+
     goto L100;
 
 L900:
@@ -101,7 +96,7 @@ L1000:
     ++state_1.moves;
 /* 						!CHARGE FOR MOVES. */
     if (strcmp(input_1.inbuf, "ECHO") != 0)
-	goto L1300;
+        goto L1300;
 
     rspeak_(571);
 /* 						!KILL THE ECHO. */
@@ -115,12 +110,11 @@ L1000:
 
 L1300:
     prsvec_1.prswon = parse_(input_1.inbuf, 0);
-    if (! prsvec_1.prswon || prsvec_1.prsa != vindex_1.walkw) {
-	goto L1400;
-    }
-    if (findxt_(prsvec_1.prso, play_1.here)) {
-	goto L300;
-    }
+    if (! prsvec_1.prswon || prsvec_1.prsa != vindex_1.walkw)
+        goto L1400;
+
+    if (findxt_(prsvec_1.prso, play_1.here))
+        goto L300;
 /* 						!VALID EXIT? */
 
 L1400:
@@ -135,9 +129,9 @@ L1400:
 /* NOTE THAT WE CANNOT BE IN THE ECHO ROOM. */
 
 L2000:
-    if ((objcts_1.oflag2[prsvec_1.prso - 1] & ACTRBT) != 0) {
-	goto L2100;
-    }
+    if ((objcts_1.oflag2[prsvec_1.prso - 1] & ACTRBT) != 0)
+        goto L2100;
+
     rspeak_(602);
 /* 						!CANT DO IT. */
     goto L350;
@@ -148,19 +142,16 @@ L2100:
 /* 						!NEW PLAYER. */
     play_1.here = advs_1.aroom[play_1.winner - 1];
 /* 						!NEW LOCATION. */
-    if (prsvec_1.prscon <= 1) {
-	goto L2700;
-    }
+    if (prsvec_1.prscon <= 1)
+        goto L2700;
 /* 						!ANY INPUT? */
-    if (parse_(input_1.inbuf, 1)) {
-	goto L2150;
-    }
+    if (parse_(input_1.inbuf, 1))
+        goto L2150;
 L2700:
     i = 341;
 /* 						!FAILS. */
-    if (play_1.telflg) {
-	i = 604;
-    }
+    if (play_1.telflg)
+        i = 604;
 /* 						!GIVE RESPONSE. */
     rspeak_(i);
 L2600:
@@ -170,20 +161,17 @@ L2600:
     goto L350;
 
 L2150:
-    if (aappli_(advs_1.aactio[play_1.winner - 1])) {
-	goto L2400;
-    }
+    if (aappli_(advs_1.aactio[play_1.winner - 1]))
+        goto L2400;
 /* 						!ACTOR HANDLE? */
-    if (xvehic_(1)) {
-	goto L2400;
-    }
+    if (xvehic_(1))
+        goto L2400;
 /* 						!VEHICLE HANDLE? */
-    if (prsvec_1.prso == oindex_1.valua || prsvec_1.prso == oindex_1.every) {
-	goto L2900;
-    }
-    if (! vappli_(prsvec_1.prsa)) {
-	goto L2400;
-    }
+    if (prsvec_1.prso == oindex_1.valua || prsvec_1.prso == oindex_1.every)
+        goto L2900;
+
+    if (! vappli_(prsvec_1.prsa))
+        goto L2400;
 /* 						!VERB HANDLE? */
 /* L2350: */
     f = rappli_(rooms_1.ractio[play_1.here - 1]);
@@ -205,35 +193,28 @@ L2900:
 
 /* DECLARATIONS */
 
-static void xendmv_(flag)
-logical flag;
+static void xendmv_(logical flag)
 {
     /* Local variables */
     logical f;
 
-    if (! (flag)) {
-	rspeak_(341);
-    }
+    if (! (flag))
+        rspeak_(341);
 /* 						!DEFAULT REMARK. */
-    if (hack_1.thfact) {
-	thiefd_();
-    }
+    if (hack_1.thfact)
+        thiefd_();
 /* 						!THIEF DEMON. */
-    if (prsvec_1.prswon) {
-	fightd_();
-    }
+    if (prsvec_1.prswon)
+        fightd_();
 /* 						!FIGHT DEMON. */
-    if (hack_1.swdact) {
-	swordd_();
-    }
+    if (hack_1.swdact)
+        swordd_();
 /* 						!SWORD DEMON. */
-    if (prsvec_1.prswon) {
-	f = clockd_();
-    }
+    if (prsvec_1.prswon)
+        f = clockd_();
 /* 						!CLOCK DEMON. */
-    if (prsvec_1.prswon) {
-	f = xvehic_(2);
-    }
+    if (prsvec_1.prswon)
+        f = xvehic_(2);
 /* 						!VEHICLE READOUT. */
 } /* xendmv_ */
 
@@ -241,8 +222,7 @@ logical flag;
 
 /* DECLARATIONS */
 
-static logical xvehic_(n)
-integer n;
+static logical xvehic_(integer n)
 {
     /* System generated locals */
     logical ret_val;
@@ -255,7 +235,8 @@ integer n;
     av = advs_1.avehic[play_1.winner - 1];
 /* 						!GET VEHICLE. */
     if (av != 0) {
-	ret_val = oappli_(objcts_1.oactio[av - 1], n);
+        ret_val = oappli_(objcts_1.oactio[av - 1], n);
     }
+
     return ret_val;
 } /* xvehic_ */
