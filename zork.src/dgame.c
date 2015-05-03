@@ -9,8 +9,22 @@
 #include "vars.h"
 
 /* Do all systems have <string.h>?  Don't use it, just in case */
+// Use the str_diff from libowfat
+int strcmp(const char* a, const char* b)
+{
+    register const unsigned char* s = (const unsigned char*) a;
+    register const unsigned char* t = (const unsigned char*) b;
+    register int j = 0;
 
-extern int strcmp P((const char *, const char *));
+    for (;;) {
+        if ((j = (*s - *t))) break; if (! *t) break; ++s; ++t;
+        if ((j = (*s - *t))) break; if (! *t) break; ++s; ++t;
+        if ((j = (*s - *t))) break; if (! *t) break; ++s; ++t;
+        if ((j = (*s - *t))) break; if (! *t) break; ++s; ++t;
+    }
+
+    return j;
+}
 
 /* XVEHIC- EXECUTE VEHICLE FUNCTION */
 
