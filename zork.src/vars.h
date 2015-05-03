@@ -408,7 +408,7 @@ EXTERN const struct {
     const integer batdrp[9];
 } bats_
 #ifdef INIT
-	= { 66, 67, 68, 69, 70, 71, 72, 65, 73 }
+	= { { 66, 67, 68, 69, 70, 71, 72, 65, 73 } }
 #endif
 	;
 
