@@ -12,8 +12,57 @@
 
 extern int strcmp P((const char *, const char *));
 
-static logical xvehic_ P((integer));
-static void xendmv_ P((logical));
+/* XVEHIC- EXECUTE VEHICLE FUNCTION */
+
+/* DECLARATIONS */
+
+static logical xvehic_(integer n)
+{
+    /* System generated locals */
+    logical ret_val;
+
+    /* Local variables */
+    integer av;
+
+    ret_val = FALSE_;
+/* 						!ASSUME LOSES. */
+    av = advs_1.avehic[play_1.winner - 1];
+/* 						!GET VEHICLE. */
+    if (av != 0)
+        ret_val = oappli_(objcts_1.oactio[av - 1], n);
+
+    return ret_val;
+} /* xvehic_ */
+
+/* XENDMV-	EXECUTE END OF MOVE FUNCTIONS. */
+
+/* DECLARATIONS */
+
+static void xendmv_(logical flag)
+{
+    /* Local variables */
+    logical f;
+
+    if (! (flag))
+        rspeak_(341);
+/* 						!DEFAULT REMARK. */
+    if (hack_1.thfact)
+        thiefd_();
+/* 						!THIEF DEMON. */
+    if (prsvec_1.prswon)
+        fightd_();
+/* 						!FIGHT DEMON. */
+    if (hack_1.swdact)
+        swordd_();
+/* 						!SWORD DEMON. */
+    if (prsvec_1.prswon)
+        f = clockd_();
+/* 						!CLOCK DEMON. */
+    if (prsvec_1.prswon)
+        f = xvehic_(2);
+/* 						!VEHICLE READOUT. */
+} /* xendmv_ */
+
 
 void game_()
 {
@@ -189,54 +238,3 @@ L2900:
 
 } /* game_ */
 
-/* XENDMV-	EXECUTE END OF MOVE FUNCTIONS. */
-
-/* DECLARATIONS */
-
-static void xendmv_(logical flag)
-{
-    /* Local variables */
-    logical f;
-
-    if (! (flag))
-        rspeak_(341);
-/* 						!DEFAULT REMARK. */
-    if (hack_1.thfact)
-        thiefd_();
-/* 						!THIEF DEMON. */
-    if (prsvec_1.prswon)
-        fightd_();
-/* 						!FIGHT DEMON. */
-    if (hack_1.swdact)
-        swordd_();
-/* 						!SWORD DEMON. */
-    if (prsvec_1.prswon)
-        f = clockd_();
-/* 						!CLOCK DEMON. */
-    if (prsvec_1.prswon)
-        f = xvehic_(2);
-/* 						!VEHICLE READOUT. */
-} /* xendmv_ */
-
-/* XVEHIC- EXECUTE VEHICLE FUNCTION */
-
-/* DECLARATIONS */
-
-static logical xvehic_(integer n)
-{
-    /* System generated locals */
-    logical ret_val;
-
-    /* Local variables */
-    integer av;
-
-    ret_val = FALSE_;
-/* 						!ASSUME LOSES. */
-    av = advs_1.avehic[play_1.winner - 1];
-/* 						!GET VEHICLE. */
-    if (av != 0) {
-        ret_val = oappli_(objcts_1.oactio[av - 1], n);
-    }
-
-    return ret_val;
-} /* xvehic_ */
