@@ -19,7 +19,6 @@ void fightd_()
     integer i__1, i__2;
 
     /* Local variables */
-    logical f;
     integer i, j, ra;
     integer obj;
     integer res;
@@ -59,7 +58,8 @@ void fightd_()
 /* 						!ANYTHING TO DO? */
 	prsvec_1.prsa = vindex_1.inxw;
 /* 						!YES, WAKE HIM UP. */
-	f = oappli_(ra, 0);
+	oappli_(ra, 0);
+
 	goto L2400;
 /* 						!NOTHING ELSE HAPPENS. */
 
@@ -99,7 +99,7 @@ L2200:
 	}
 	prsvec_1.prsa = vindex_1.fightw;
 /* 						!HAVE A FIGHT. */
-	f = oappli_(ra, 0);
+	oappli_(ra, 0);
 L2300:
 	if (obj == oindex_1.thief) {
 	    findex_1.thfenf = FALSE_;
@@ -112,7 +112,8 @@ L2300:
 	}
 	prsvec_1.prsa = vindex_1.inxw;
 /* 						!WAKE HIM UP. */
-	f = oappli_(ra, 0);
+	oappli_(ra, 0);
+
 	objcts_1.ocapac[obj - 1] = (i__2 = objcts_1.ocapac[obj - 1], abs(i__2)
 		);
 L2400:
@@ -206,8 +207,7 @@ integer out;
     integer ret_val, i__1, i__2;
 
     /* Local variables */
-    logical f;
-    integer i, j, oa, ra, od, mi, dv, def;
+    integer i, j, ra, od, mi, dv, def;
     integer tbl;
     integer att, res;
     integer dweap;
@@ -240,7 +240,6 @@ integer out;
 L100:
     att = fights_(h, 1);
 /* 						!GET HIS STRENGTH. */
-    oa = att;
     def = vilstr_(v);
 /* 						!GET VILL STRENGTH. */
     od = def;
@@ -289,7 +288,6 @@ L1000:
 L1200:
     att = vilstr_(v);
 /* 						!SET UP ATT, DEF. */
-    oa = att;
     def = fights_(h, 1);
     if (def <= 0) {
 	return ret_val;
@@ -476,7 +474,8 @@ L4000:
 /* 						!IF NX TO DO, EXIT. */
     prsvec_1.prsa = vindex_1.deadxw;
 /* 						!LET HIM KNOW. */
-    f = oappli_(ra, 0);
+    oappli_(ra, 0);
+
     return ret_val;
 
 L4100:
@@ -485,7 +484,8 @@ L4100:
     }
     prsvec_1.prsa = vindex_1.outxw;
 /* 						!LET HIM BE OUT. */
-    f = oappli_(ra, 0);
+    oappli_(ra, 0);
+
     return ret_val;
 
 L4500:
@@ -588,14 +588,15 @@ integer r;
     logical ret_val;
 
     if (! findex_1.endgmf) {
-	ret_val = objcts_1.oroom[oindex_1.cyclo - 1] == r || objcts_1.oroom[
-		oindex_1.troll - 1] == r || objcts_1.oroom[oindex_1.thief - 
-		1] == r && hack_1.thfact;
+	ret_val = objcts_1.oroom[oindex_1.cyclo - 1] == r ||
+                  objcts_1.oroom[oindex_1.troll - 1] == r ||
+                  (objcts_1.oroom[oindex_1.thief - 1] == r && hack_1.thfact);
     }
     else {
-	ret_val = r == rindex_1.mrg || r == rindex_1.mrge || r == 
-		rindex_1.mrgw || r == rindex_1.inmir && findex_1.mloc == 
-		rindex_1.mrg;
+	ret_val = r == rindex_1.mrg ||
+                  r == rindex_1.mrge ||
+                  r == rindex_1.mrgw ||
+                  (r == rindex_1.inmir && findex_1.mloc == rindex_1.mrg);
     }
     return ret_val;
 } /* infest_ */
