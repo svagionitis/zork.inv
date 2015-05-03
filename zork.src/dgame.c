@@ -10,7 +10,7 @@
 
 /* Do all systems have <string.h>?  Don't use it, just in case */
 // Use the str_diff from libowfat
-int strcmp(const char* a, const char* b)
+static int str_diff(const char* a, const char* b)
 {
     register const unsigned char* s = (const unsigned char*) a;
     register const unsigned char* t = (const unsigned char*) b;
@@ -54,8 +54,6 @@ static logical xvehic_(integer n)
 
 static void xendmv_(logical flag)
 {
-    /* Local variables */
-    logical f;
 
     if (! (flag))
         rspeak_(341);
@@ -70,10 +68,10 @@ static void xendmv_(logical flag)
         swordd_();
 /* 						!SWORD DEMON. */
     if (prsvec_1.prswon)
-        f = clockd_();
+        clockd_();
 /* 						!CLOCK DEMON. */
     if (prsvec_1.prswon)
-        f = xvehic_(2);
+        xvehic_(2);
 /* 						!VEHICLE READOUT. */
 } /* xendmv_ */
 
@@ -81,14 +79,13 @@ static void xendmv_(logical flag)
 void game_()
 {
     /* Local variables */
-    logical f;
     integer i;
 
 /* START UP, DESCRIBE CURRENT LOCATION. */
 
     rspeak_(1);
 /* 						!WELCOME ABOARD. */
-    f = rmdesc_(3);
+    rmdesc_(3);
 /* 						!START GAME. */
 
 /* NOW LOOP, READING AND EXECUTING COMMANDS. */
@@ -103,7 +100,7 @@ L100:
 
 #ifdef ALLOW_GDT
 
-    if (strcmp(input_1.inbuf + prsvec_1.prscon - 1, "GDT") == 0) {
+    if (str_diff(input_1.inbuf + prsvec_1.prscon - 1, "GDT") == 0) {
 /* 						!CALL ON GDT? */
         gdt_();
 /* 						!YES, INVOKE. */
@@ -136,7 +133,7 @@ L350:
     if (! findex_1.echof && play_1.here == rindex_1.echor)
         goto L1000;
 
-    f = rappli_(rooms_1.ractio[play_1.here - 1]);
+    rappli_(rooms_1.ractio[play_1.here - 1]);
 
 L400:
     xendmv_(play_1.telflg);
@@ -158,7 +155,7 @@ L1000:
     rdline_(input_1.inbuf, 0);
     ++state_1.moves;
 /* 						!CHARGE FOR MOVES. */
-    if (strcmp(input_1.inbuf, "ECHO") != 0) {
+    if (str_diff(input_1.inbuf, "ECHO") != 0) {
         prsvec_1.prswon = parse_(input_1.inbuf, 0);
         if (! prsvec_1.prswon ||
             prsvec_1.prsa != vindex_1.walkw) {
@@ -248,7 +245,7 @@ L2000:
             }
         /* 						!VERB HANDLE? */
         /* L2350: */
-            f = rappli_(rooms_1.ractio[play_1.here - 1]);
+            rappli_(rooms_1.ractio[play_1.here - 1]);
         }
     }
 
