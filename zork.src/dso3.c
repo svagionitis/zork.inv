@@ -106,9 +106,8 @@ logical nocare;
 	if ((objcts_1.oflag1[i - 1] & VISIBT) == 0) {
 	    goto L1000;
 	}
-	if (~ (nocare) & (objcts_1.oflag1[i - 1] & TAKEBT) == 0 || (
-		objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] 
-		& f2) == 0) {
+	if ((~ (nocare) & (objcts_1.oflag1[i - 1] & TAKEBT)) == 0 ||
+            ((objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0)) {
 	    goto L500;
 	}
 	if (ret_val == 0) {
@@ -132,9 +131,9 @@ L500:
 	i__2 = objcts_1.olnt;
 	for (j = 1; j <= i__2; ++j) {
 /* 						!NO, SEARCH CONTENTS. */
-	    if (objcts_1.ocan[j - 1] != i || (objcts_1.oflag1[j - 1] & 
-		    VISIBT) == 0 || (objcts_1.oflag1[j - 1] & f1) ==
-		     0 && (objcts_1.oflag2[j - 1] & f2) == 0) {
+	    if (objcts_1.ocan[j - 1] != i ||
+                (objcts_1.oflag1[j - 1] & VISIBT) == 0 ||
+                ((objcts_1.oflag1[j - 1] & f1) ==0 && (objcts_1.oflag2[j - 1] & f2) == 0)) {
 		goto L700;
 	    }
 	    if (ret_val == 0) {
