@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
 {
     // Silence the compiler warnings
     // by using argc and argv.
-    argc = argc;
     argv[argc] = NULL;
 
 /* 1) INITIALIZE DATA STRUCTURES */
