@@ -216,8 +216,9 @@ L300:
 		goto L500;
 	    }
 /* 						!INSIDE ANYTHING? */
-	    if (((objcts_1.oflag1[x - 1] & VISIBT) == 0 || (objcts_1.oflag1[x - 1] & TRANBT) == 0) &&
-                ((objcts_1.oflag2[x - 1] & OPENBT) == 0 || (objcts_1.oflag2[x - 1] & SCHBT) == 0)) {
+	    if ((objcts_1.oflag1[x - 1] & VISIBT) == 0 ||
+                ((objcts_1.oflag1[x - 1] & TRANBT) == 0 && (objcts_1.oflag2[x - 1] & OPENBT) == 0) ||
+                (objcts_1.oflag2[x - 1] & SCHBT) == 0) {
 		goto L500;
 	    }
 	    x = objcts_1.ocan[x - 1];
