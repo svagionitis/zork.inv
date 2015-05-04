@@ -15,7 +15,6 @@ integer ri;
     logical ret_val;
 
     /* Local variables */
-    logical f;
     integer i;
     integer j;
 
@@ -179,8 +178,7 @@ L4500:
 	return ret_val;
     }
 /* 						!WALKIN? */
-    if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT + 
-	    TCHBT) != OPENBT) {
+    if ((objcts_1.oflag2[oindex_1.door - 1] & (OPENBT + TCHBT)) != OPENBT) {
 	return ret_val;
     }
     objcts_1.oflag2[oindex_1.door - 1] = (objcts_1.oflag2[oindex_1.door - 1] |
@@ -236,9 +234,9 @@ L6000:
     return ret_val;
 
 L6500:
-    if (findex_1.rvclr != 0 || qhere_(oindex_1.leave, rindex_1.clear) && (
-	    prsvec_1.prsa != vindex_1.movew || prsvec_1.prso != 
-	    oindex_1.leave)) {
+    if (findex_1.rvclr != 0 ||
+        (qhere_(oindex_1.leave, rindex_1.clear) && (prsvec_1.prsa != vindex_1.movew)) ||
+        prsvec_1.prso != oindex_1.leave) {
 	return ret_val;
     }
     rspeak_(30);
@@ -475,7 +473,7 @@ L17500:
     }
     rspeak_(50);
 /* 						!TIME TO FLY, JACK. */
-    f = moveto_(bats_1.batdrp[rnd_(9)], play_1.winner);
+    moveto_(bats_1.batdrp[rnd_(9)], play_1.winner);
 /* 						!SELECT RANDOM DEST. */
     ret_val = FALSE_;
 /* 						!INDICATE NEW DESC NEEDED. */
@@ -932,7 +930,7 @@ L36600:
 
 L37000:
     if (findex_1.cagesf) {
-	f = moveto_(rindex_1.cager, play_1.winner);
+	moveto_(rindex_1.cager, play_1.winner);
     }
 /* 						!IF SOLVED, MOVE. */
     return ret_val;
