@@ -655,10 +655,8 @@ L48000:
     if (j == 0) {
 	goto L10;
     }
-    if ((objcts_1.oflag1[j - 1] & TRANBT) == 0 && (! ((
-	    objcts_1.oflag2[j - 1] & OPENBT) != 0) || (
-	    objcts_1.oflag1[j - 1] & DOORBT + CONTBT) == 0))
-	     {
+    if ((objcts_1.oflag1[j - 1] & TRANBT) == 0 && (! ((objcts_1.oflag2[j - 1] & OPENBT) != 0) ||
+        (objcts_1.oflag1[j - 1] & (DOORBT + CONTBT)) == 0)) {
 	goto L10;
     }
     i = 417;
@@ -799,8 +797,7 @@ L56000:
 	goto L56050;
     }
 /* 						!ANY OBJ SPECIFIED? */
-    if ((rooms_1.rflag[play_1.here - 1] & RWATER + RFILL) != 
-	    0) {
+    if ((rooms_1.rflag[play_1.here - 1] & (RWATER + RFILL)) != 0) {
 	goto L56025;
     }
     rspeak_(516);
@@ -896,9 +893,7 @@ L59600:
 /* V137--	BURN.  COMPLICATED. */
 
 L60000:
-    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FLAMBT + 
-	    LITEBT + ONBT) != FLAMBT + 
-	    LITEBT + ONBT) {
+    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & (FLAMBT + LITEBT + ONBT)) != FLAMBT + LITEBT + ONBT) {
 	goto L60400;
     }
     if (objact_()) {
@@ -928,7 +923,7 @@ L60050:
 L60100:
     j = objcts_1.ocan[prsvec_1.prso - 1];
 /* 						!GET CONTAINER. */
-    if (qhere_(prsvec_1.prso, play_1.here) || av != 0 && j == av) {
+    if (qhere_(prsvec_1.prso, play_1.here) || (av != 0 && j == av)) {
 	goto L60200;
     }
     if (j == 0) {
@@ -939,7 +934,7 @@ L60100:
 	goto L60150;
     }
 /* 						!OPEN? */
-    if (qhere_(j, play_1.here) || av != 0 && objcts_1.ocan[j - 1] == av) {
+    if (qhere_(j, play_1.here) || (av != 0 && objcts_1.ocan[j - 1] == av)) {
 	goto L60200;
     }
 L60150:
@@ -1158,8 +1153,7 @@ L80300:
 /* 						!OBJ HANDLE? */
     i = 354;
 /* 						!ASSUME VILLAIN. */
-    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT + 
-	    ACTRBT) == 0) {
+    if ((objcts_1.oflag2[prsvec_1.prso - 1] & (VILLBT + ACTRBT)) == 0) {
 	i = 355;
     }
     rspsub_(i, odo2);
@@ -1284,8 +1278,9 @@ L87000:
 	i = 524;
     }
 /* 						!VARIETY OF JOKES. */
-    if (! f && (prsvec_1.prso == oindex_1.wall || prsvec_1.prso >= 
-	    oindex_1.wnort && prsvec_1.prso <= oindex_1.wnort + 3)) {
+    if (! f &&
+        (prsvec_1.prso == oindex_1.wall ||
+         (prsvec_1.prso >= oindex_1.wnort && prsvec_1.prso <= oindex_1.wnort + 3))) {
 	i = 656;
     }
     rspeak_(i);
