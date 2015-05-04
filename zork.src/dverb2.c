@@ -123,7 +123,8 @@ void rstrgm_()
     do_uio(1, &j, sizeof(integer));
     do_uio(1, &k, sizeof(integer));
 
-    if (i != vers_1.vmaj | j != vers_1.vmin) {
+    // TODO The following might be ||.
+    if ((i != vers_1.vmaj) | (j != vers_1.vmin)) {
 	goto L200;
     }
 
@@ -469,8 +470,8 @@ L6000:
 /* C7-	FROBOZZ FLAG (BANK ALARM) */
 
 L7000:
-    findex_1.frobzf = objcts_1.oroom[oindex_1.bills - 1] != 0 & 
-	    objcts_1.oroom[oindex_1.portr - 1] != 0;
+    findex_1.frobzf = (objcts_1.oroom[oindex_1.bills - 1] != 0) &
+                      (objcts_1.oroom[oindex_1.portr - 1] != 0);
     return ret_val;
 /* CXAPPL, PAGE 3 */
 
@@ -490,7 +491,7 @@ L8000:
 	goto L8300;
     }
 /* 						!MIRROR MUST BE N-S. */
-    curxt_1.xroom1 = (curxt_1.xroom1 - rindex_1.mra << 1) + rindex_1.mrae;
+    curxt_1.xroom1 = ((curxt_1.xroom1 - rindex_1.mra) << 1) + rindex_1.mrae;
 /* 						!CALC EAST ROOM. */
     if (prsvec_1.prso > xsrch_1.xsouth) {
 	++curxt_1.xroom1;
@@ -515,7 +516,8 @@ L8300:
     }
     curxt_1.xstrng = 815;
 /* 						!MIRROR BLOCKS. */
-    if (ldir > 180 && ! findex_1.mr1f || ldir < 180 && ! findex_1.mr2f) {
+    if ((ldir > 180 && ! findex_1.mr1f) ||
+        (ldir < 180 && ! findex_1.mr2f)) {
 	curxt_1.xstrng = 816;
     }
     return ret_val;
@@ -550,12 +552,11 @@ L10000:
 /* 						!ASSUME CANT. */
     ldir = (prsvec_1.prso - xsrch_1.xnorth) / xsrch_1.xnorth * 45;
 /* 						!XLATE DIR TO DEGREES. */
-    if (! findex_1.mropnf || (findex_1.mdir + 270) % 360 != ldir && 
-	    prsvec_1.prso != xsrch_1.xexit) {
+    if (! findex_1.mropnf ||
+        ((findex_1.mdir + 270) % 360 != ldir && prsvec_1.prso != xsrch_1.xexit)) {
 	goto L10200;
     }
-    curxt_1.xroom1 = (findex_1.mloc - rindex_1.mra << 1) + rindex_1.mrae + 1 
-	    - findex_1.mdir / 180;
+    curxt_1.xroom1 = ((findex_1.mloc - rindex_1.mra) << 1) + rindex_1.mrae + 1 - findex_1.mdir / 180;
 /* 						!ASSUME E-W EXIT. */
     if (findex_1.mdir % 180 == 0) {
 	goto L10100;
@@ -572,8 +573,8 @@ L10100:
     return ret_val;
 
 L10200:
-    if (! findex_1.wdopnf || (findex_1.mdir + 180) % 360 != ldir && 
-	    prsvec_1.prso != xsrch_1.xexit) {
+    if (! findex_1.wdopnf ||
+        ((findex_1.mdir + 180) % 360 != ldir && prsvec_1.prso != xsrch_1.xexit)) {
 	return ret_val;
     }
     curxt_1.xroom1 = findex_1.mloc + 1;
