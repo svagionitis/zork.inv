@@ -30,7 +30,6 @@ integer ri;
     logical ret_val;
 
     /* Local variables */
-    logical f;
     const char *z, *z2;
     integer i, j;
     integer k;
@@ -217,8 +216,7 @@ L5000:
 L6000:
     i = 330;
 /* 						!ASSUME WATER. */
-    if ((rooms_1.rflag[play_1.here - 1] & RWATER + RFILL) == 
-	    0) {
+    if ((rooms_1.rflag[play_1.here - 1] & (RWATER + RFILL)) == 0) {
 	i = rnd_(3) + 331;
     }
     rspeak_(i);
@@ -295,7 +293,7 @@ L10050:
     return ret_val;
 
 L10100:
-    f = rmdesc_(3);
+    rmdesc_(3);
 /* 						!MOVED, DESCRIBE. */
     return ret_val;
 
@@ -379,9 +377,8 @@ L16000:
 /* V86--	WALK THROUGH */
 
 L17000:
-    if (screen_1.scolrm == 0 || prsvec_1.prso != oindex_1.scol && (
-	    prsvec_1.prso != oindex_1.wnort || play_1.here != rindex_1.bkbox))
-	     {
+    if (screen_1.scolrm == 0 ||
+        (prsvec_1.prso != oindex_1.scol && (prsvec_1.prso != oindex_1.wnort || play_1.here != rindex_1.bkbox))) {
 	goto L17100;
     }
     screen_1.scolac = screen_1.scolrm;
@@ -392,9 +389,9 @@ L17000:
 /* 						!START ALARM. */
     rspeak_(668);
 /* 						!DISORIENT HIM. */
-    f = moveto_(screen_1.scolrm, play_1.winner);
+    moveto_(screen_1.scolrm, play_1.winner);
 /* 						!INTO ROOM. */
-    f = rmdesc_(3);
+    rmdesc_(3);
 /* 						!DESCRIBE. */
     return ret_val;
 
@@ -450,9 +447,9 @@ L17500:
 /* 						!CANCEL ALARM. */
     rspeak_(668);
 /* 						!DISORIENT HIM. */
-    f = moveto_(rindex_1.bkbox, play_1.winner);
+    moveto_(rindex_1.bkbox, play_1.winner);
 /* 						!BACK IN BOX ROOM. */
-    f = rmdesc_(3);
+    rmdesc_(3);
     return ret_val;
 
 /* V87--	RING.  A JOKE. */
@@ -575,8 +572,8 @@ L22200:
 	goto L22300;
     }
 /* 						!DOWN EXIT? */
-    if (curxt_1.xtype == xpars_1.xno || curxt_1.xtype == xpars_1.xcond && ! 
-	    flags[*xflag - 1]) {
+    if (curxt_1.xtype == xpars_1.xno ||
+        (curxt_1.xtype == xpars_1.xcond && ! flags[*xflag - 1])) {
 	goto L22400;
     }
 L22300:
