@@ -10,6 +10,7 @@
 logical trollp_(arg)
 integer arg;
 {
+    arg = arg;
     /* System generated locals */
     logical ret_val;
 
@@ -170,6 +171,7 @@ L10:
 logical cyclop_(arg)
 integer arg;
 {
+    arg = arg;
     /* System generated locals */
     integer i__1, i__2;
     logical ret_val;
@@ -309,6 +311,7 @@ L500:
 logical thiefp_(arg)
 integer arg;
 {
+    arg = arg;
     /* System generated locals */
     integer i__1;
     logical ret_val;
@@ -481,8 +484,8 @@ L675:
     return ret_val;
 
 L700:
-    if (prsvec_1.prsa != vindex_1.throww && prsvec_1.prsa != vindex_1.givew ||
-	     prsvec_1.prso == 0 || prsvec_1.prso == oindex_1.thief) {
+    if ((prsvec_1.prsa != vindex_1.throww && prsvec_1.prsa != vindex_1.givew) ||
+        prsvec_1.prso == 0 || prsvec_1.prso == oindex_1.thief) {
 	goto L10;
     }
     if (objcts_1.ocapac[oindex_1.thief - 1] >= 0) {
