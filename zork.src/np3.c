@@ -286,8 +286,8 @@ integer sfl2;
 	goto L100;
     }
 /* 						!ANY OBJECT? */
-    ret_val = prep == (sprep & VPMASK) && (sfl1 & objcts_1.oflag1[
-	    obj - 1] | sfl2 & objcts_1.oflag2[obj - 1]) != 0;
+    ret_val = prep == (sprep & VPMASK) &&
+                      ((sfl1 & objcts_1.oflag1[obj - 1]) | (sfl2 & objcts_1.oflag2[obj - 1])) != 0;
     return ret_val;
 
 L100:
@@ -393,8 +393,8 @@ L3000:
     return ret_val;
 
 L3500:
-    if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight_(0, obj,
-	     play_1.winner) + objcts_1.osize[obj - 1] <= state_1.mxload) {
+    if ((x != 0 && objcts_1.oadv[x - 1] == play_1.winner) ||
+        weight_(0, obj, play_1.winner) + objcts_1.osize[obj - 1] <= state_1.mxload) {
 	goto L3700;
     }
     rspeak_(558);
