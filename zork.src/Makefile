@@ -42,13 +42,14 @@ TERMFLAG =
 # GDTFLAG = -DALLOW_GDT
 
 # Compilation flags
-CFLAGS = -O -Wall -Wextra -Werror -Wshadow -Wstrict-prototypes -Wmissing-prototypes
+CFLAGS = -Wall -Wextra -Werror -Wshadow -Wstrict-prototypes -Wmissing-prototypes
 # On SCO Unix Development System 3.2.2a, the const type qualifier does
 # not work correctly when using cc.  The following line will cause it
 # to not be used and should be uncommented.
 # CFLAGS= -O -Dconst=
 
 ##################################################################
+MAIN =	dungeon
 
 # Source files
 CSRC =	$(shell echo *.c)
@@ -56,21 +57,37 @@ CSRC =	$(shell echo *.c)
 # Object files
 OBJS =	$(CSRC:.c=.o)
 
-MAIN =	dungeon
-
 $(MAIN): $(OBJS) dtextc.dat
 	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) $(LIBS)
 
+.PHONY: install
 install: $(MAIN) dtextc.dat
 	cp $(MAIN) $(BINDIR)
 	cp dtextc.dat $(LIBDIR)
 
+.PHONY: clean
 clean:
-	rm -f $(OBJS) $(MAIN) dtextc.dat core dsave.dat *~
+	rm -f $(OBJS) $(MAIN) *~
+
+.PHONY: distclean
+distclean:
+	rm -f dtextc.dat core dsave.dat
 
 dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
 .c.o:
 	$(CC) $(CFLAGS) $(GDTFLAG) $(TERMFLAG) -DTEXTFILE=\"$(LIBDIR)/dtextc.dat\" -c $<  -o $@
+
+.PHONY: debug
+debug: CFLAGS += -O0 -g -ggdb
+debug: $(MAIN)
+
+.PHONY: release
+release: CFLAGS += -O3
+release: $(MAIN)
+
+.PHONY: profile
+profile: CFLAGS += -pg
+profile: $(MAIN)
 
