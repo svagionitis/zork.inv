@@ -456,7 +456,8 @@ L100:
 /* 						!WHICH MIRROR? */
     mrbf = 0;
 /* 						!ASSUME INTACT. */
-    if (m1 == 1 && ! findex_1.mr1f || m1 == 2 && ! findex_1.mr2f) {
+    if ((m1 == 1 && ! findex_1.mr1f) ||
+        (m1 == 2 && ! findex_1.mr2f)) {
 	mrbf = 1;
     }
     i__1 = mrbf + 849;
@@ -509,7 +510,8 @@ integer st;
     m1 = findex_1.mdir + (rm - rindex_1.mrae) % 2 * 180 == 180;
     i = (rm - rindex_1.mrae) % 2 + 819;
 /* 						!GET BASIC E/W STRING. */
-    if (m1 && ! findex_1.mr1f || ! m1 && ! findex_1.mr2f) {
+    if ((m1 && ! findex_1.mr1f) ||
+        (! m1 && ! findex_1.mr2f)) {
 	i += 2;
     }
     rspeak_(i);
