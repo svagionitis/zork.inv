@@ -18,7 +18,6 @@ integer arg;
     logical ret_val;
 
     /* Local variables */
-    logical f;
     integer i;
     integer mroom;
     integer av;
@@ -309,7 +308,7 @@ L14000:
 	}
 /* L14100: */
     }
-    f = moveto_(mroom, play_1.winner);
+    moveto_(mroom, play_1.winner);
     rspeak_(163);
 /* 						!SHAKE WORLD. */
     return ret_val;
@@ -857,9 +856,9 @@ L38400:
 /* O25--	BRAIDED ROPE */
 
 L41000:
-    if (prsvec_1.prsa != vindex_1.tiew || prsvec_1.prso != oindex_1.brope || 
-	    prsvec_1.prsi != oindex_1.hook1 && prsvec_1.prsi != 
-	    oindex_1.hook2) {
+    if (prsvec_1.prsa != vindex_1.tiew ||
+        prsvec_1.prso != oindex_1.brope ||
+        (prsvec_1.prsi != oindex_1.hook1 && prsvec_1.prsi != oindex_1.hook2)) {
 	goto L41500;
     }
     findex_1.btief = prsvec_1.prsi;
