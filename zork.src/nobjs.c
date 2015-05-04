@@ -15,16 +15,16 @@ logical nobjs_(ri, arg)
 integer ri;
 integer arg;
 {
+    arg = arg;
     /* System generated locals */
     integer i__1, i__2;
     logical ret_val;
 
     /* Local variables */
-    logical f;
     integer target;
     integer i;
     integer j;
-    integer av, wl;
+    integer wl;
     integer nxt, odi2 = 0, odo2 = 0;
 
     if (prsvec_1.prso != 0) {
@@ -33,7 +33,6 @@ integer arg;
     if (prsvec_1.prsi != 0) {
 	odi2 = objcts_1.odesc2[prsvec_1.prsi - 1];
     }
-    av = advs_1.avehic[play_1.winner - 1];
     ret_val = TRUE_;
 
     switch (ri - 31) {
@@ -177,7 +176,7 @@ L3100:
 /* 						!BYE BYE GNOME. */
     cevent_1.ctick[cindex_1.cevzgo - 1] = 0;
 /* 						!CANCEL EXIT. */
-    f = moveto_(rindex_1.bkent, play_1.winner);
+    moveto_(rindex_1.bkent, play_1.winner);
 /* 						!NOW IN BANK ENTRANCE. */
     return ret_val;
 
@@ -305,8 +304,9 @@ L5000:
     return ret_val;
 
 L5100:
-    if (! findex_1.singsf && (play_1.here == rindex_1.mtree || play_1.here >= 
-	    rindex_1.fore1 && play_1.here < rindex_1.clear)) {
+    if (! findex_1.singsf &&
+        (play_1.here == rindex_1.mtree ||
+         (play_1.here >= rindex_1.fore1 && play_1.here < rindex_1.clear))) {
 	goto L5200;
     }
     rspeak_(646);
@@ -613,8 +613,8 @@ L12300:
 /* O44--	BRONZE DOOR */
 
 L13000:
-    if (play_1.here == rindex_1.ncell || findex_1.lcell == 4 && (play_1.here 
-	    == rindex_1.cell || play_1.here == rindex_1.scorr)) {
+    if (play_1.here == rindex_1.ncell ||
+        (findex_1.lcell == 4 && (play_1.here == rindex_1.cell || play_1.here == rindex_1.scorr))) {
 	goto L13100;
     }
     rspeak_(763);
@@ -736,11 +736,11 @@ L17000:
     }
 /* 						!IN RIGHT CELL? */
     objcts_1.oflag1[oindex_1.odoor - 1] |= VISIBT;
-    f = moveto_(rindex_1.ncell, aindex_1.player);
+    moveto_(rindex_1.ncell, aindex_1.player);
 /* 						!YES, MOVETO NCELL. */
     goto L17400;
 L17200:
-    f = moveto_(rindex_1.pcell, aindex_1.player);
+    moveto_(rindex_1.pcell, aindex_1.player);
 /* 						!NO, MOVETO PCELL. */
 
 L17400:
@@ -881,7 +881,8 @@ logical pnf;
 L100:
     mrbf = 0;
 /* 						!ASSUME MIRROR OK. */
-    if (num == 1 && ! findex_1.mr1f || num == 2 && ! findex_1.mr2f) {
+    if ((num == 1 && ! findex_1.mr1f) ||
+        (num == 2 && ! findex_1.mr2f)) {
 	mrbf = 1;
     }
     if (prsvec_1.prsa != vindex_1.movew && prsvec_1.prsa != vindex_1.openw) {
@@ -893,8 +894,10 @@ L100:
     return ret_val;
 
 L200:
-    if (pnf || prsvec_1.prsa != vindex_1.lookiw && prsvec_1.prsa != 
-	    vindex_1.examiw && prsvec_1.prsa != vindex_1.lookw) {
+    if (pnf ||
+        (prsvec_1.prsa != vindex_1.lookiw &&
+         prsvec_1.prsa != vindex_1.examiw &&
+         prsvec_1.prsa != vindex_1.lookw)) {
 	goto L300;
     }
     i__1 = mrbf + 844;
