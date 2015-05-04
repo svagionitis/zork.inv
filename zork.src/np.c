@@ -108,7 +108,8 @@ L200:
 	goto L100;
     }
 /* 						!DO SYN MATCH. */
-    if (prsvec_1.prso > 0 & prsvec_1.prso < xsrch_1.xmin) {
+    // TODO Is & or &&
+    if ((prsvec_1.prso > 0) & (prsvec_1.prso < xsrch_1.xmin)) {
 	last_1.lastit = prsvec_1.prso;
     }
 
@@ -219,7 +220,8 @@ L200:
 /* 						!SPACE? */
     for (i = 1; i <= 9; i += 3) {
 /* 						!SCH FOR CHAR. */
-	if (j >= dlimit[i - 1] & j <= dlimit[i]) {
+        // TODO Is & or &&
+	if ((j >= dlimit[i - 1]) & (j <= dlimit[i])) {
 	    goto L4000;
 	}
 /* L500: */
@@ -238,7 +240,8 @@ L1000:
 	prsvec_1.prscon = 1;
     }
 /* 						!FORCE PARSE RESTART. */
-    if (cp == 0 & *op == 1) {
+    // TODO Is & or &&
+    if ((cp == 0) & (*op == 1)) {
 	return ret_val;
     }
     if (cp == 0) {
