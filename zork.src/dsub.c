@@ -22,8 +22,7 @@ static void rspsb2nl_ P((integer, integer, integer, logical));
 
 /* 	CALL RSPEAK(MSGNUM) */
 
-void rspeak_(n)
-integer n;
+void rspeak_(integer n)
 {
     rspsb2nl_(n, 0, 0, 1);
 } /* rspeak_ */
@@ -34,9 +33,7 @@ integer n;
 
 /* 	CALL RSPSUB(MSGNUM,SUBNUM) */
 
-void rspsub_(n, s1)
-integer n;
-integer s1;
+void rspsub_(integer n, integer s1)
 {
     rspsb2nl_(n, s1, 0, 1);
 } /* rspsub_ */
@@ -47,21 +44,14 @@ integer s1;
 
 /* 	CALL RSPSB2(MSGNUM,SUBNUM1,SUBNUM2) */
 
-void rspsb2_(n, s1, s2)
-integer n;
-integer s1;
-integer s2;
+void rspsb2_(integer n, integer s1, integer s2)
 {
     rspsb2nl_(n, s1, s2, 1);
 } /* rspsb2_ */
 
 /* rspsb2nl_ Display a substitutable message with an optional newline */
 
-static void rspsb2nl_(n, y, z, nl)
-integer n;
-integer y;
-integer z;
-logical nl;
+static void rspsb2nl_(integer n, integer y, integer z, logical nl)
 {
     const char *zkey = "IanLanceTaylorJr";
     long x;
@@ -167,9 +157,7 @@ L200:
 
 /* 	CALL BUG(NO,PAR) */
 
-void bug_(a, b)
-integer a;
-integer b;
+void bug_(integer a, integer b)
 {
     /* Local variables */
 
@@ -189,12 +177,7 @@ integer b;
 
 /* 	CALL NEWSTA(OBJECT,STRING,NEWROOM,NEWCON,NEWADV) */
 
-void newsta_(o, r, rm, cn, ad)
-integer o;
-integer r;
-integer rm;
-integer cn;
-integer ad;
+void newsta_(integer o, integer r, integer rm, integer cn, integer ad)
 {
     rspeak_(r);
     objcts_1.oroom[o - 1] = rm;
@@ -206,9 +189,7 @@ integer ad;
 
 /* DECLARATIONS */
 
-logical qhere_(obj, rm)
-integer obj;
-integer rm;
+logical qhere_(integer obj, integer rm)
 {
     /* System generated locals */
     integer i__1;
@@ -240,8 +221,7 @@ integer rm;
 
 /* DECLARATIONS */
 
-logical qempty_(obj)
-integer obj;
+logical qempty_(integer obj)
 {
     /* System generated locals */
     integer i__1;
@@ -268,8 +248,7 @@ integer obj;
 
 /* DECLARATIONS */
 
-void jigsup_(desc)
-integer desc;
+void jigsup_(integer desc)
 {
     /* Initialized data */
 
@@ -431,8 +410,7 @@ L1100:
 
 /* DECLARATIONS */
 
-integer oactor_(obj)
-integer obj;
+integer oactor_(integer obj)
 {
     /* System generated locals */
     integer ret_val = 1, i__1;
@@ -460,9 +438,7 @@ integer obj;
 
 /* DECLARATIONS */
 
-logical prob_(g, b)
-integer g;
-integer b;
+logical prob_(integer g, integer b)
 {
     /* System generated locals */
     logical ret_val;
@@ -486,8 +462,7 @@ integer b;
 /* RMDESC PRINTS A DESCRIPTION OF THE CURRENT ROOM. */
 /* IT IS ALSO THE PROCESSOR FOR VERBS 'LOOK' AND 'EXAMINE'. */
 
-logical rmdesc_(full)
-integer full;
+logical rmdesc_(integer full)
 {
     /* System generated locals */
     logical ret_val, L__1;
@@ -599,8 +574,7 @@ L600:
 
 /* DECLARATIONS */
 
-logical rappli_(ri)
-integer ri;
+logical rappli_(integer ri)
 {
     /* Initialized data */
 

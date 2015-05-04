@@ -176,12 +176,7 @@ L2700:
 
 /* DECLARATIONS */
 
-integer blow_(h, v, rmk, hflg, out)
-integer h;
-integer v;
-integer rmk;
-logical hflg;
-integer out;
+integer blow_(integer h, integer v, integer rmk, logical hflg, integer out)
 {
     /* Initialized data */
 
@@ -581,8 +576,7 @@ L500:
 /* INFEST-	SUBROUTINE TO TEST FOR INFESTED ROOM */
 
 /* DECLARATIONS */
-static logical infest_(r)
-integer r;
+static logical infest_(integer r)
 {
     /* System generated locals */
     logical ret_val;

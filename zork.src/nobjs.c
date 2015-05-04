@@ -11,13 +11,11 @@
 
 static logical mirpan_ P((integer, logical));
 
-logical nobjs_(ri, arg)
-integer ri;
-integer arg;
+logical nobjs_(integer ri, integer arg)
 {
-    arg = arg;
     /* System generated locals */
-    integer i__1, i__2;
+    // TODO See if arg is needed
+    integer i__1, i__2 = arg;
     logical ret_val;
 
     /* Local variables */
@@ -855,9 +853,7 @@ L21200:
 
 /* DECLARATIONS */
 
-static logical mirpan_(st, pnf)
-integer st;
-logical pnf;
+static logical mirpan_(integer st, logical pnf)
 {
     /* System generated locals */
     integer i__1;

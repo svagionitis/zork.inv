@@ -8,9 +8,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical findxt_(dir, rm)
-integer dir;
-integer rm;
+logical findxt_(integer dir, integer rm)
 {
     /* System generated locals */
     logical ret_val;
@@ -70,13 +68,7 @@ L1000:
 
 /* DECLARATIONS */
 
-integer fwim_(f1, f2, rm, con, adv, nocare)
-integer f1;
-integer f2;
-integer rm;
-integer con;
-integer adv;
-logical nocare;
+integer fwim_(integer f1, integer f2, integer rm, integer con, integer adv, logical nocare)
 {
     /* System generated locals */
     integer ret_val, i__1, i__2;
@@ -159,10 +151,7 @@ L1000:
 
 /* 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING) */
 
-logical yesno_(q, y, n)
-integer q;
-integer y;
-integer n;
+logical yesno_(integer q, integer y, integer n)
 {
     /* System generated locals */
     logical ret_val;

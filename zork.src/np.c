@@ -15,9 +15,7 @@ extern int system P((const char *));
 
 static logical lex_ P((char *, integer *, integer *, logical));
 
-void rdline_(buffer, who)
-char *buffer;
-integer who;
+void rdline_(char *buffer, integer who)
 {
     /* Local variables */
     char *z, *zlast;
@@ -63,9 +61,7 @@ L90:
 
 /* THIS ROUTINE DETAILS ON BIT 0 OF PRSFLG */
 
-logical parse_(inbuf, vbflag)
-char *inbuf;
-logical vbflag;
+logical parse_(char *inbuf, logical vbflag)
 {
     /* System generated locals */
     integer i__1;
@@ -134,12 +130,7 @@ L100:
 
 /* DECLARATIONS */
 
-void orphan_(o1, o2, o3, o4, o5)
-integer o1;
-integer o2;
-integer o3;
-integer o4;
-integer o5;
+void orphan_(integer o1, integer o2, integer o3, integer o4, integer o5)
 {
     orphs_1.oflag = o1;
 /* 						!SET UP NEW ORPHANS. */
@@ -153,11 +144,7 @@ integer o5;
 
 /* THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG */
 
-static logical lex_(inbuf, outbuf, op, vbflag)
-char *inbuf;
-integer *outbuf;
-integer *op;
-logical vbflag;
+static logical lex_(char *inbuf, integer *outbuf, integer *op, logical vbflag)
 {
     /* Initialized data */
 
