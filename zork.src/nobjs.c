@@ -393,6 +393,9 @@ L9000:
 /* 						!WHAT? */
 
 L9200:
+    // TODO Check the following error from cppcheck
+    // [nobjs.c:396]: (error) Array 'puzzle_.cpwl[8]' accessed at index 9, which is out of bounds.
+    // Possible solution change to i-1
     j = puzzle_1.cpwl[i];
 /* 						!GET DIRECTIONAL OFFSET. */
     nxt = findex_1.cphere + j;
@@ -604,6 +607,8 @@ L12300:
 	i = 762;
     }
 /* 						!IN ROOM? */
+    // TODO Check the following error from cppcheck
+    // [nobjs.c:607]: (error) Array 'objcts_.odesc2[220]' accessed at index 761, which is out of bounds.
     rspsub_(j, objcts_1.odesc2[i - 1]);
 /* 						!DESCRIBE. */
     return ret_val;
