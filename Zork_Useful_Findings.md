@@ -159,3 +159,76 @@ C Operator Precedence
 
 Source:
 *   http://en.cppreference.com/w/c/language/operator_precedence
+
+
+C/C++ Code Static Analyzers
+============================
+
+Two static code analyzers used, [`cppcheck`](http://cppcheck.sourceforge.net/) and [`flawfinder`](http://www.dwheeler.com/flawfinder/).
+The errors found by `cppcheck`, the command run was `cppcheck *.{c,h}` are the following
+
+
+	Checking dinit.c...
+	[dinit.c:29]: (error) syntax error
+	Checking dinit.c: ALLOW_GDT...
+	Checking dinit.c: INIT...
+	Checking dinit.c: __AMOS__...
+	Checking dinit.c: __STDC__...
+	Checking dinit.c: unix...
+	...
+	Checking nobjs.c...
+	[nobjs.c:399]: (error) Array 'puzzle_.cpwl[8]' accessed at index 9, which is out of bounds.
+	[nobjs.c:612]: (error) Array 'objcts_.odesc2[220]' accessed at index 761, which is out of bounds.
+	Checking nobjs.c: INIT...
+	Checking nobjs.c: __STDC__...
+	Checking nobjs.c: unix...
+
+After inspecting the code, they really do exist. Now, executing the `flawfinder *.{c,h}`, the output is more of suggetion of possible
+issues, rather than actual problems. Next following a sample
+
+
+	clockr.c:618:  [4] (crypto) crypt:
+	  Function crypt is a poor one-way hashing algorithm; since it only
+	  accepts passwords of 8 characters or less, and only a two-byte salt, it is
+	  excessively vulnerable to dictionary attacks given today''s faster
+	  computing equipment. Use a different algorithm, such as SHA-1, with a larger
+	  non-repeating salt.
+	np.c:14:  [4] (shell) system:
+	  This causes a new program to execute and is difficult to use safely.
+	  try using a library call that implements the same functionality if
+	  available.
+	...
+	dinit.c:18:  [3] (random) srand:
+	  This function is not sufficiently random for security-related
+	  functions such as key and nonce creation. use a more secure technique for
+	  acquiring random values.
+	...
+	supp.c:108:  [3] (buffer) getenv:
+	  Environment variables are untrustable input if they can be set by an
+	  attacker.  They can have any content and length, and the same variable
+	  can be set more than once. Check environment variables carefully before
+	  using them.
+	...
+	dinit.c:326:  [2] (misc) fopen:
+	  Check when opening files - can an attacker redirect it (via symlinks),
+	  force the opening of special file type (e.g., device files), move
+	  things around to create a race condition, control its ancestors, or change
+	  its contents?.
+	...
+	dso3.c:160:  [2] (buffer) char:
+	  Statically-sized arrays can be overflowed. Perform bounds checking,
+	  use functions that limit length, or ensure that the size is larger than
+	  the maximum possible length.
+	...
+	dinit.c:41:  [1] (buffer) getc:
+	  Check buffer boundaries if used in a loop.
+	...
+	gdt.c:62:  [1] (buffer) sscanf:
+	  it''s unclear if the %s limit in the format string is small enough.
+	  Check that the limit is sufficiently small, or use a different input
+	  function.
+
+Sources:
+*   http://www.reddit.com/r/cpp/comments/2aksxk/so_ive_seen_cppcheck_and_flawfinder_any_good/
+*   http://cppcheck.sourceforge.net/
+*   http://www.dwheeler.com/flawfinder/
