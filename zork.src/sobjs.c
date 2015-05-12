@@ -9,9 +9,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical sobjs_(ri, arg)
-integer ri;
-integer arg;
+logical sobjs_(integer ri, integer arg)
 {
     /* System generated locals */
     integer i__1;

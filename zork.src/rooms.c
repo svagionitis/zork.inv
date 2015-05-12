@@ -7,8 +7,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical rappl1_(ri)
-integer ri;
+logical rappl1_(integer ri)
 {
     /* System generated locals */
     integer i__1, i__2;

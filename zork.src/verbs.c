@@ -7,8 +7,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical vappli_(ri)
-integer ri;
+logical vappli_(integer ri)
 {
     /* Initialized data */
 

@@ -352,8 +352,7 @@ L900:
 
 /* DECLARATIONS */
 
-static integer cxappl_(ri)
-integer ri;
+static integer cxappl_(integer ri)
 {
     /* System generated locals */
     integer ret_val, i__1;

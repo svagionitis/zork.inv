@@ -10,8 +10,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical sverbs_(ri)
-integer ri;
+logical sverbs_(integer ri)
 {
     /* Initialized data */
 

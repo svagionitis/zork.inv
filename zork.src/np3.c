@@ -206,9 +206,7 @@ L5000:
 
 /* DECLARATIONS */
 
-static void unpack_(oldj, j)
-integer oldj;
-integer *j;
+static void unpack_(integer oldj, integer *j)
 {
     /* Local variables */
     integer i;
@@ -272,12 +270,7 @@ L200:
 
 /* DECLARATIONS */
 
-static logical syneql_(prep, obj, sprep, sfl1, sfl2)
-integer prep;
-integer obj;
-integer sprep;
-integer sfl1;
-integer sfl2;
+static logical syneql_(integer prep, integer obj, integer sprep, integer sfl1, integer sfl2)
 {
     /* System generated locals */
     logical ret_val;
@@ -300,9 +293,7 @@ L100:
 
 /* DECLARATIONS */
 
-static logical takeit_(obj, sflag)
-integer obj;
-integer sflag;
+static logical takeit_(integer obj, integer sflag)
 {
     /* System generated locals */
     logical ret_val;
@@ -419,10 +410,7 @@ L4000:
 
 /* DECLARATIONS */
 
-static integer gwim_(sflag, sfw1, sfw2)
-integer sflag;
-integer sfw1;
-integer sfw2;
+static integer gwim_(integer sflag, integer sfw1, integer sfw2)
 {
     /* System generated locals */
     integer ret_val;

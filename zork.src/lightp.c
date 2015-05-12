@@ -7,8 +7,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical lightp_(obj)
-integer obj;
+logical lightp_(integer obj)
 {
     /* System generated locals */
     logical ret_val;

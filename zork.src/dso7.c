@@ -8,9 +8,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-void encryp_(inw, outw)
-const char *inw;
-char *outw;
+void encryp_(const char *inw, char *outw)
 {
     /* Initialized data */
 
@@ -62,8 +60,7 @@ char *outw;
 
 /* DECLARATIONS */
 
-void cpgoto_(st)
-integer st;
+void cpgoto_(integer st)
 {
     /* System generated locals */
     integer i__1, i__2;
@@ -92,9 +89,7 @@ integer st;
 
 /* DECLARATIONS */
 
-void cpinfo_(rmk, st)
-integer rmk;
-integer st;
+void cpinfo_(integer rmk, integer st)
 {
     /* Initialized data */
 
