@@ -232,3 +232,34 @@ Sources:
 *   http://www.reddit.com/r/cpp/comments/2aksxk/so_ive_seen_cppcheck_and_flawfinder_any_good/
 *   http://cppcheck.sourceforge.net/
 *   http://www.dwheeler.com/flawfinder/
+
+
+Useful `sed` one liners related to `goto`s
+==========================================
+
+
+*   Print out labels from goto statement like `goto LABEL;` for a file
+
+
+	sed -n "s/goto \(L.*\);/\1/p" ballop.c
+
+
+*   Print out the content between two labels.
+
+
+	sed -n "/^L50:/,/^L.*:/p" ballop.c
+
+
+    It will print like the following
+
+
+	L50:
+	rspsub_(544, objcts_1.odesc2[findex_1.binff - 1]);
+	/* 						!YES. */
+	L100:
+
+
+    If we want to remove the labels
+
+
+	sed -n "/^L50:/,/^L.*:/p" ballop.c | sed "s/^L.*://g"
